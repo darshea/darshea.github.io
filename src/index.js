@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ToggleIntro from './ToggleIntro';
-import RubberduckIntro from './RubberduckIntro';
-import Biography from './Biography';
 import ContactMe from './ContactMe';
 import Construction from './construction';
 
@@ -14,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
-    <BrowserRouter basename="/darshea/darshea.github.io.git">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="toggle_intro" element={<ToggleIntro />} />
