@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/darshea/darshea.github.io.git/static/css/main.d0d73abf.css",
+    "main.js": "/darshea/darshea.github.io.git/static/js/main.563089ee.js",
+    "static/js/787.f44c439f.chunk.js": "/darshea/darshea.github.io.git/static/js/787.f44c439f.chunk.js",
+    "static/media/Resume.pdf": "/darshea/darshea.github.io.git/static/media/Resume.e7df97229bc97ad1fd99.pdf",
+    "index.html": "/darshea/darshea.github.io.git/index.html",
+    "main.d0d73abf.css.map": "/darshea/darshea.github.io.git/static/css/main.d0d73abf.css.map",
+    "main.563089ee.js.map": "/darshea/darshea.github.io.git/static/js/main.563089ee.js.map",
+    "787.f44c439f.chunk.js.map": "/darshea/darshea.github.io.git/static/js/787.f44c439f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d0d73abf.css",
+    "static/js/main.563089ee.js"
+  ]
+}
