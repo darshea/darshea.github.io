@@ -1,0 +1,58 @@
+.toggle-intro-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* You mentioned 3 or 5 columns, let's go with 3 here but you can change to repeat(5, 1fr) if desired */
+    grid-gap: 20px;
+    max-width: 1000px; /* Same width as your .container */
+    margin: 0 auto;
+    background-color: #ffffff; /* All white background */
+    justify-items: center;
+    align-items: start;
+  }
+  
+  .toggle-intro-content {
+    font-family: 'Inter', sans-serif; /* Using the same font-family as your .nav */
+    font-size: 20px; /* Based on the font size you used in .nav, you might want to adjust */
+    color: #000; /* All in black */
+    transition: color 0.3s ease-in-out; /* Smooth transition for hover effect */
+    grid-column: 1 / 3;
+  }
+  
+  /* Hover effect for the content */
+  .toggle-intro-content:hover {
+    color: red;
+  }
+  
+  .description {
+    font-family: 'Inter', sans-serif; /* Using the same font-family as your .nav */
+    font-size: 25px; /* Based on the font size you used in .nav, you might want to adjust */
+    color: #000; /* All in black */
+    transition: color 0.3s ease-in-out; /* Smooth transition for hover effect */
+    grid-column: 2 / 3;
+    cursor: pointer;
+    margin: auto;
+    font-style: italic;
+  }
+
+  .description:hover {
+    color: red;
+  }
+
+  .title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .fone {
+    margin-top: 30;
+  }
+
+  .title-center {
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif; /* Using the same font-family as your .nav */
+    font-size: 40px; /* Based on the font size you used in .nav, you might want to adjust */
+    color: #000; /* All in black */
+    transition: color 0.3s ease-in-out; /* Smooth transition for hover effect */
+    margin-top: 20%;
+  }

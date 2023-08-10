@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ToggleIntro from './ToggleIntro';
+import RubberduckIntro from './RubberduckIntro';
+import Biography from './Biography';
+import ContactMe from './ContactMe';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="toggle_intro" element={<ToggleIntro />} />
+        <Route path="rubberduck_intro" element={<RubberduckIntro />} />
+        <Route path="biography" element={<Biography />} />
+        <Route path="contactme" element={<ContactMe />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

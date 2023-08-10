@@ -1,0 +1,19 @@
+.ItemButton {
+    display: grid;
+    width: 300px;
+    height: 100px;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    background-color: #ffffff;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    /*border: 1px solid black; Add border to each grid item */
+    font-size: 35px;
+    font-weight: 800;
+    border: none; /* Remove the border */
+    transition: color 0.05s ease-in-out;
+}
+
+.ItemButton:hover {
+    color: red;
+}
