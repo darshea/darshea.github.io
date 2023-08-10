@@ -38,12 +38,14 @@ function App() {
             <ItemButton text="Rubber Duck" to="/rubberduck_intro" />
           </Link>
           <Link to="/">
-            <ItemButton text="Portfolio" to="/" />
+            <ItemButton text="Portfolio" to="https://github.com/darshea/darshea.github.io" />
           </Link>
         </div>
         <div>
           <ItemButton text="Storybook" to="https://github.com/darshea/CMPT-276-Group-13" />
-          <ItemButton text="Minutebook Generator" to="/construction" />
+          <Link to="/minutebook_intro">
+            <ItemButton text="Minutebook Generator" to="/construction" />
+          </Link>
         </div>
       </div>
       <div className='bottomline'>

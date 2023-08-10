@@ -8,6 +8,7 @@ import ToggleIntro from './ToggleIntro';
 import RubberduckIntro from './RubberduckIntro';
 import Biography from './Biography';
 import ContactMe from './ContactMe';
+import Construction from './construction';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +18,9 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="toggle_intro" element={<ToggleIntro />} />
-        <Route path="rubberduck_intro" element={<RubberduckIntro />} />
-        <Route path="biography" element={<Biography />} />
+        <Route path="rubberduck_intro" element={<Construction />} />
+        <Route path="biography" element={<Construction />} />
+        <Route path="minutebook_intro" element={<Construction />} />
         <Route path="contactme" element={<ContactMe />} />
       </Routes>
     </BrowserRouter>
