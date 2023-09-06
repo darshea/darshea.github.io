@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import ToggleIntro from './ToggleIntro';
 import ContactMe from './ContactMe';
 import Construction from './construction';
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="toggle_intro" element={<ToggleIntro />} />
@@ -21,7 +21,7 @@ root.render(
         <Route path="minutebook_intro" element={<Construction />} />
         <Route path="contactme" element={<ContactMe />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 
