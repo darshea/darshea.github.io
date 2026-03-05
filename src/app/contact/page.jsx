@@ -1,9 +1,8 @@
 export const metadata = { title: 'Contact — Danbi Kim' }
 
 const links = [
-  { label: 'GitHub', href: 'https://github.com/danbikim', display: 'github.com/danbikim' },
-  { label: 'LinkedIn', href: '#', display: 'linkedin.com/in/danbikim' },
-  { label: 'Email', href: 'mailto:hello@danbikim.com', display: 'hello@danbikim.com' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/danbikim', display: 'linkedin.com/in/danbikim' },
+  { label: 'Email', href: 'mailto:danbi000121@gmail.com', display: 'danbi000121@gmail.com' },
 ]
 
 export default function Contact() {

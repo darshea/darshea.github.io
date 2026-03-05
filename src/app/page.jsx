@@ -5,7 +5,7 @@ export default function Home() {
     <div className="pt-8">
       <h1 className="text-4xl font-semibold tracking-tight mb-3">Danbi Kim</h1>
       <p className="text-gray-500 text-lg mb-12">
-        Building at the intersection of AI and finance.
+        Building systems that think about markets.
       </p>
       <nav className="flex gap-6 text-sm">
         {['About', 'Projects', 'Blog', 'Contact'].map((label) => (

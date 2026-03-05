@@ -7,16 +7,21 @@ export default function About() {
 
       <div className="space-y-4 text-gray-700 leading-relaxed">
         <p>
-          I'm Danbi Kim, a quant/AI researcher based in Seoul.
-          I build systems that sit at the boundary of machine learning and financial markets.
+          Made in Moscow, raised in Seoul, based in Vancouver. Korean Canadian.
         </p>
         <p>
-          Currently working on the AI Displacement Score (ADS) — a framework for
-          quantifying how AI disrupts public companies — and an algorithmic gold trading system.
+          CS grad from SFU, currently a Management Reporting Analyst at Powerex (BC Hydro) —
+          building financial data pipelines and ML-powered anomaly detection. Before that:
+          data science at Pratt &amp; Whitney Canada, license plate detection at a Vancouver
+          startup, and automating legal workflows with Python at a law firm.
         </p>
         <p>
-          Previously in fintech and data engineering. Interested in credit markets,
-          autonomous agents, and anything that replaces a spreadsheet with a model.
+          After hours I build things I want to exist. Right now that's an algorithmic gold
+          trading bot running 24/7, and a research tool that scores how AI will disrupt
+          public companies.
+        </p>
+        <p>
+          Sundays are for church and kitchen volunteering.
         </p>
       </div>
 
@@ -25,9 +30,8 @@ export default function About() {
           Now
         </h2>
         <ul className="space-y-2 text-gray-700 text-sm">
-          <li>→ ADS: AI Displacement Score research framework</li>
-          <li>→ gold-trader: multi-agent XAU/USD trading system</li>
-          <li>→ Writing about AI risk and credit analysis</li>
+          <li>→ gold-trader: algorithmic XAU/USD trading bot, running 24/7</li>
+          <li>→ ADS: automated pipeline that scores AI disruption risk for public companies</li>
         </ul>
       </div>
     </div>

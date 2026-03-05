@@ -4,14 +4,14 @@ const projects = [
   {
     name: 'ADS — AI Displacement Score',
     description:
-      'Quantifying how AI disrupts public companies. Automated research, evidence-backed scoring across 5 dimensions, and institutional-quality reports.',
+      'Automated pipeline that researches public companies and quantifies their AI disruption risk.',
     url: null,
     status: 'Active',
   },
   {
     name: 'gold-trader',
     description:
-      'Algorithmic XAU/USD trading system. Multi-agent technical analysis pipeline with Bollinger, S/R, trend, and retail sentiment signals.',
+      'Algorithmic XAU/USD trading system with 10+ agents analyzing Bollinger Bands, trend, support/resistance, and retail positioning.',
     url: null,
     status: 'Active',
   },
