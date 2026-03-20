@@ -3,7 +3,7 @@ export const metadata = {
   description: 'Structured AI risk analysis for public equities. Five dimensions. One score.',
 }
 
-const SUBSTACK_URL = '[SUBSTACK_URL]'
+const SUBSTACK_URL = 'https://danbikim1.substack.com/subscribe'
 
 const dimensions = [
   { id: 'D1', name: 'Labor Vulnerability',  desc: '% of workforce in roles with high automation exposure. O*NET automation scores × company department weights, AI hiring ratio as adaptation signal.' },
