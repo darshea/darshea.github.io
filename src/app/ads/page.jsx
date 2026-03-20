@@ -205,7 +205,7 @@ export default function ADS() {
 
       {/* Footer */}
       <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid #e0e0e0', fontSize: 12, color: '#bbb', lineHeight: 1.8 }}>
-        <p>AI Displacement Score by <a href="https://danbikim.github.io" style={{ color: '#888', textDecoration: 'none' }}>Danbi Kim</a></p>
+        <p>AI Displacement Score by <a href="https://darshea.github.io" style={{ color: '#888', textDecoration: 'none' }}>Danbi Kim</a></p>
         <p style={{ marginTop: 4 }}>This is an analytical framework, not investment advice. The author may hold positions in securities discussed.</p>
       </div>
 
