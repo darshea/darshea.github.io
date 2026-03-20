@@ -1,7 +1,7 @@
 export const metadata = { title: 'Contact — Danbi Kim' }
 
 const links = [
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/danbikim', display: 'linkedin.com/in/danbikim' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/danbi-kim-b97833191', display: 'linkedin.com/in/danbi-kim-b97833191' },
   { label: 'Email', href: 'mailto:danbi000121@gmail.com', display: 'danbi000121@gmail.com' },
 ]
 
