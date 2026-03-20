@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly #1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 520px;
+    margin: 0 auto 16px;
+  }
+  .header .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Intro */
+  .intro {
+    background: #f8f8f8;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  /* Section headers */
+  .section-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #1a1a1a;
+  }
+  .section-header.risk { border-bottom-color: #dc2626; }
+  .section-header.safe { border-bottom-color: #16a34a; }
+
+  /* Company card */
+  .company {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+  }
+  .company:last-of-type { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .score-high { color: #dc2626; }
+  .score-med { color: #d97706; }
+  .score-low { color: #16a34a; }
+
+  .company-meta {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+
+  /* Score bars */
+  .scores {
+    margin: 16px 0;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .score-label {
+    width: 160px;
+    color: #555;
+    flex-shrink: 0;
+  }
+  .score-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 10px;
+  }
+  .score-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+  .bar-high { background: #dc2626; }
+  .bar-med { background: #d97706; }
+  .bar-low { background: #16a34a; }
+  .score-num {
+    font-family: 'JetBrains Mono', monospace;
+    width: 32px;
+    text-align: right;
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* Findings */
+  .findings {
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .findings li {
+    margin-bottom: 8px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .findings li::before {
+    content: "→ ";
+    color: #999;
+  }
+
+  /* Trigger */
+  .trigger {
+    background: #fafafa;
+    border-left: 3px solid #d97706;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #555;
+  }
+  .trigger strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #d97706;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* Comparison table */
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    text-align: left;
+    padding: 8px 6px;
+    border-bottom: 2px solid #1a1a1a;
+  }
+  td {
+    padding: 10px 6px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tr:hover td { background: #fafafa; }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .badge-high { background: #fef2f2; color: #dc2626; }
+  .badge-med { background: #fffbeb; color: #d97706; }
+  .badge-low { background: #f0fdf4; color: #16a34a; }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+  }
+  .footer a { color: #555; }
+
+  /* CTA */
+  .cta {
+    text-align: center;
+    margin: 48px 0;
+    padding: 32px;
+    background: #f8f8f8;
+    border-radius: 8px;
+  }
+  .cta p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  .cta .big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: #1a1a1a;
+  }
+
+  /* Dimension explainer */
+  .dimensions {
+    margin: 24px 0 48px;
+    font-size: 13px;
+    color: #777;
+  }
+  .dimensions dt {
+    font-weight: 700;
+    color: #555;
+    display: inline;
+  }
+  .dimensions dd {
+    display: inline;
+    margin: 0 0 0 4px;
+  }
+  .dimensions dd::after {
+    content: "";
+    display: block;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ADS Weekly</h1>
+  <p class="subtitle">Scoring how AI will disrupt public companies — before the market prices it in.</p>
+  <p class="date">Issue #1 · March 14, 2026</p>
+</div>
+
+<div class="intro">
+  The <strong>AI Displacement Score (ADS)</strong> measures structural risk from AI disruption across five dimensions: labor vulnerability, revenue durability, pricing power, intermediation thickness, and adaptation speed. Scale: 0–100. <strong>Higher = greater displacement risk.</strong>
+  <br><br>
+  This week: 10 companies scored. 5 most at risk. 5 best positioned.
+</div>
+
+<!-- ==================== MOST AT RISK ==================== -->
+<h2 class="section-header risk">🔴 Most at Risk</h2>
+
+<!-- CHGG -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">1. Chegg</span>
+    <span class="company-score score-high">CHGG · 90/100</span>
+  </div>
+  <div class="company-meta">Education / EdTech · ~$69M market cap · <span class="badge badge-high">HIGH RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><span class="score-num">90</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><span class="score-num">90</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><span class="score-num">90</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:100%"></div></div><span class="score-num">100</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><span class="score-num">80</span></div>
+  </div>
+  <ul class="findings">
+    <li>Chegg's core product <em>is</em> what AI replaced — its 135M Q&A database and expert tutoring service are now performed for free by ChatGPT, which was in part trained on Chegg's own content.</li>
+    <li>Revenue decline accelerating: -6.6% (FY2023) → -39.0% (FY2025) → guided ~-35% Q1 2026. Subscribers collapsed from 8.0M to ~3.2M.</li>
+    <li>The Skilling pivot ($70M ARR, 0.175% of $40B TAM) is directionally sound but fatally under-scaled against Duolingo, Coursera, LinkedIn Learning.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    ChatGPT directly substituting core homework-help product. Subscriber decline accelerating with no stabilization signal.
+  </div>
+</div>
+
+<!-- UPWK -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">2. Upwork</span>
+    <span class="company-score score-med">UPWK · 68/100</span>
+  </div>
+  <div class="company-meta">Freelance Marketplace · ~$1.6B market cap · <span class="badge badge-med">MEDIUM RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><span class="score-num">90</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:70%"></div></div><span class="score-num">70</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><span class="score-num">80</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+  </div>
+  <ul class="findings">
+    <li>45% of Upwork's $4.0B GSV is at direct AI substitution risk — concentrated in writing (-32% YoY), IT & networking (-27%), data science (-14%).</li>
+    <li>Revenue growth is a monetization artifact: FY2025 revenue grew 2% while GSV was flat and active clients fell 6%. Entire gain engineered through take-rate expansion.</li>
+    <li>Of seven value-chain layers, only payment processing and trust/safety carry durable advantages. Discovery and matching are replicable by AI agents today.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    AI coding agents (Copilot, Cursor, Devin) eliminating freelance dev demand — a $50/month subscription replacing $5,000 engagements triggers GSV collapse.
+  </div>
+</div>
+
+<!-- PATH -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">3. UiPath</span>
+    <span class="company-score score-med">PATH · 52/100</span>
+  </div>
+  <div class="company-meta">RPA / Agentic Automation · ~$7.5B market cap · <span class="badge badge-med">MEDIUM RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:60%"></div></div><span class="score-num">60</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:60%"></div></div><span class="score-num">60</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:40%"></div></div><span class="score-num">40</span></div>
+  </div>
+  <ul class="findings">
+    <li>RPA market plateauing (~$8B cap) while AI agent market explodes to $52.6B by 2030. UiPath's installed base provides migration, but only if Maestro wins first.</li>
+    <li>Revenue repeatability deteriorating: NRR declining to 107%, flat customer count, FY2027 guidance decelerating to ~9% growth.</li>
+    <li>Switching costs under attack: migration case studies show 8.9x cost savings switching to Microsoft Power Automate.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    Microsoft Power Automate (bundled in M365) capturing mid-market before Maestro establishes AI orchestration leadership.
+  </div>
+</div>
+
+<!-- GOOGL -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">4. Alphabet</span>
+    <span class="company-score score-med">GOOGL · 40/100</span>
+  </div>
+  <div class="company-meta">Digital Advertising / Cloud / AI · ~$2.0T market cap · <span class="badge badge-med">MEDIUM RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:70%"></div></div><span class="score-num">70</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+  </div>
+  <ul class="findings">
+    <li>U.S. search ad market share fell below 50% for the first time. ChatGPT now processes 2B+ daily queries — a direct substitute for Google's core revenue.</li>
+    <li>Adaptation massive but race not won: $91.4B FY2025 capex guided to $175–185B in 2026. Gemini costs declined 78%.</li>
+    <li>Monetization gap unresolved: AI Overviews display ads only 7–9% of the time vs traditional SERP, reducing paid CTR by 68%.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    Apple Search deal dissolution (post-antitrust) + ChatGPT gaining iOS default status, reducing Google query volume by 20–40%.
+  </div>
+</div>
+
+<!-- WDAY -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">5. Workday</span>
+    <span class="company-score score-low">WDAY · 36/100</span>
+  </div>
+  <div class="company-meta">HCM / ERP · ~$13B market cap · <span class="badge badge-low">LOW RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:40%"></div></div><span class="score-num">40</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+  </div>
+  <ul class="findings">
+    <li>Core HCM and payroll compliance across 200+ jurisdictions anchors a thick intermediation layer. Peripheral analytics exposed.</li>
+    <li>AI revenue nascent: >$100M new AI ACV in Q4, 1.7B AI actions processed — credible trajectory but not yet an accelerator.</li>
+    <li>Management's own actions contradict public statements: two workforce cuts attributed to AI, launch of consumption pricing.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    Flex Credits consumption model revealing AI-driven seat compression faster than guidance implies.
+  </div>
+</div>
+
+<!-- ==================== BEST POSITIONED ==================== -->
+<h2 class="section-header safe">🟢 Best Positioned</h2>
+
+<!-- NVDA -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">1. NVIDIA</span>
+    <span class="company-score score-low">NVDA · 24/100</span>
+  </div>
+  <div class="company-meta">AI Infrastructure / Semiconductors · ~$3.0–3.5T market cap · <span class="badge badge-low">LOW RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:40%"></div></div><span class="score-num">40</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:10%"></div></div><span class="score-num">10</span></div>
+  </div>
+  <ul class="findings">
+    <li>NVIDIA is a net beneficiary of AI displacement. Every incremental AI workload requires GPU compute. Agentic AI needs up to 100x more compute than 2024-era chatbots.</li>
+    <li>CUDA's 19-year ecosystem — 2M+ developers, 3,500+ GPU-accelerated apps, 600+ libraries — functions as de facto recurring revenue lock-in.</li>
+    <li>Structural concentration is the primary risk: Data Center at 90% of FY2026 revenue, top-5 hyperscalers ~50–60% of that.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    Sustained hyperscaler capex deceleration or expansion of China export restrictions compressing the Data Center segment.
+  </div>
+</div>
+
+<!-- NOW -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">2. ServiceNow</span>
+    <span class="company-score score-low">NOW · 28/100</span>
+  </div>
+  <div class="company-meta">IT Service Management · ~$120B market cap · <span class="badge badge-low">LOW RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:40%"></div></div><span class="score-num">40</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+  </div>
+  <ul class="findings">
+    <li>Building the AI moat, not eroding it. Now Assist ACV grew >100% YoY to exceed $600M. AI successfully productized as incremental revenue.</li>
+    <li>Revenue durability exceptional: 98% renewal, NRR above 125%, $12.85B cRPO growing 25% YoY.</li>
+    <li>$2.85B Moveworks acquisition and AI Control Tower counter Microsoft Copilot threat. Enterprise switching costs $1.2–$4.5M.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    Now Assist ACV growth decelerating below 50% YoY, signaling AI premium pricing is saturating the installed base.
+  </div>
+</div>
+
+<!-- META -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">3. Meta Platforms</span>
+    <span class="company-score score-low">META · 32/100</span>
+  </div>
+  <div class="company-meta">Social Media / Advertising / AI · ~$1.7T market cap · <span class="badge badge-low">LOW RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+  </div>
+  <ul class="findings">
+    <li>AI aggressor, not target. $72B FY2025 capex (scaling to $115–135B in 2026) is the largest AI investment in corporate history.</li>
+    <li>~16,000 layoffs in 2026 framed as "financing mechanism for AI" — cuts improve cost structure rather than signal impairment.</li>
+    <li>Structural positioning as dominant AI-powered ad intermediary serving 3.58 billion people not captured in conventional ratings.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    $115–135B FY2026 capex failing to generate proportional AI revenue uplift, compressing FCF below $35B.
+  </div>
+</div>
+
+<!-- CRM -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">4. Salesforce</span>
+    <span class="company-score score-low">CRM · 36/100</span>
+  </div>
+  <div class="company-meta">CRM / Agentic AI · ~$180B market cap · <span class="badge badge-low">LOW RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:60%"></div></div><span class="score-num">60</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+  </div>
+  <ul class="findings">
+    <li>AI disruptor, not victim. $800M standalone Agentforce ARR in 15 months, 29,000 paid deals, 11.14T tokens processed in Q4 alone.</li>
+    <li>Primary risk is internal: ~5,000 roles eliminated in FY2025, engineering hiring freeze, 30–50% of workload moved onto AI.</li>
+    <li>Agentforce Flex Credits ($0.10/action) generate less revenue per unit than seat licenses — self-cannibalization not yet priced in.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    Agentforce consumption cannibalizing seat-license revenue faster than new ACV offsets, causing net revenue per customer to decline.
+  </div>
+</div>
+
+<!-- INTU -->
+<div class="company">
+  <div class="company-header">
+    <span class="company-name">5. Intuit</span>
+    <span class="company-score score-low">INTU · 34/100</span>
+  </div>
+  <div class="company-meta">Application Software / Fintech · ~$122.3B market cap · <span class="badge badge-low">LOW RISK</span></div>
+  <div class="scores">
+    <div class="score-row"><span class="score-label">D1 Labor</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:50%"></div></div><span class="score-num">50</span></div>
+    <div class="score-row"><span class="score-label">D2 Revenue</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+    <div class="score-row"><span class="score-label">D3 Pricing</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:20%"></div></div><span class="score-num">20</span></div>
+    <div class="score-row"><span class="score-label">D4 Intermediation</span><div class="score-bar-bg"><div class="score-bar bar-med" style="width:40%"></div></div><span class="score-num">40</span></div>
+    <div class="score-row"><span class="score-label">D5 Adaptation</span><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><span class="score-num">30</span></div>
+  </div>
+  <ul class="findings">
+    <li>AI is a tailwind: operating income grew 36% on 16% revenue growth in FY2025. AI agents auto-categorized 237M transactions in Jan 2026.</li>
+    <li>IRS Direct File cancelled for 2026 season. TurboTax holds 60% U.S. consumer tax software market share.</li>
+    <li>Medium-term bypass risk in accounting is real but nascent: Basis ($1.15B valuation) and Digits haven't captured QuickBooks share at scale.</li>
+  </ul>
+  <div class="trigger">
+    <strong>Key Trigger</strong>
+    AI-native competitor capturing >5% of QuickBooks' SMB base, triggering NRR deterioration below 90%.
+  </div>
+</div>
+
+<!-- ==================== COMPARISON TABLE ==================== -->
+<h2 class="section-header">📊 Full Comparison</h2>
+
+<div class="table-wrapper">
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Company</th>
+      <th>Ticker</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Chegg</td><td class="td-ticker">CHGG</td><td class="td-score">90</td><td><span class="badge badge-high">HIGH</span></td><td>90</td><td>90</td><td>90</td><td>100</td><td>80</td></tr>
+    <tr><td>2</td><td>Upwork</td><td class="td-ticker">UPWK</td><td class="td-score">68</td><td><span class="badge badge-med">MED</span></td><td>90</td><td>70</td><td>50</td><td>80</td><td>50</td></tr>
+    <tr><td>3</td><td>UiPath</td><td class="td-ticker">PATH</td><td class="td-score">52</td><td><span class="badge badge-med">MED</span></td><td>50</td><td>50</td><td>60</td><td>60</td><td>40</td></tr>
+    <tr><td>4</td><td>Alphabet</td><td class="td-ticker">GOOGL</td><td class="td-score">40</td><td><span class="badge badge-med">MED</span></td><td>50</td><td>30</td><td>30</td><td>70</td><td>20</td></tr>
+    <tr><td>5</td><td>Workday</td><td class="td-ticker">WDAY</td><td class="td-score">36</td><td><span class="badge badge-low">LOW</span></td><td>50</td><td>30</td><td>30</td><td>40</td><td>30</td></tr>
+    <tr><td>6</td><td>Salesforce</td><td class="td-ticker">CRM</td><td class="td-score">36</td><td><span class="badge badge-low">LOW</span></td><td>60</td><td>30</td><td>30</td><td>30</td><td>30</td></tr>
+    <tr><td>7</td><td>Intuit</td><td class="td-ticker">INTU</td><td class="td-score">34</td><td><span class="badge badge-low">LOW</span></td><td>50</td><td>30</td><td>20</td><td>40</td><td>30</td></tr>
+    <tr><td>8</td><td>Meta</td><td class="td-ticker">META</td><td class="td-score">32</td><td><span class="badge badge-low">LOW</span></td><td>50</td><td>30</td><td>30</td><td>30</td><td>20</td></tr>
+    <tr><td>9</td><td>ServiceNow</td><td class="td-ticker">NOW</td><td class="td-score">28</td><td><span class="badge badge-low">LOW</span></td><td>40</td><td>20</td><td>30</td><td>30</td><td>20</td></tr>
+    <tr><td>10</td><td>NVIDIA</td><td class="td-ticker">NVDA</td><td class="td-score">24</td><td><span class="badge badge-low">LOW</span></td><td>20</td><td>40</td><td>30</td><td>20</td><td>10</td></tr>
+  </tbody>
+</table>
+</div>
+
+<dl class="dimensions">
+  <dt>D1 Labor</dt><dd>Share of workforce automatable by AI</dd>
+  <dt>D2 Revenue</dt><dd>Durability of recurring revenue against AI substitution</dd>
+  <dt>D3 Pricing</dt><dd>Ability to maintain price against free/cheaper AI alternatives</dd>
+  <dt>D4 Intermediation</dt><dd>How easily AI can bypass the business entirely</dd>
+  <dt>D5 Adaptation</dt><dd>Speed and effectiveness of the company's own AI pivot</dd>
+</dl>
+
+<!-- CTA -->
+<div class="cta">
+  <p class="big">Get the full report for every company.</p>
+  <p>Detailed 40+ page analysis with SEC filing data, competitive landscape, and risk triggers — updated quarterly.</p>
+  <p style="margin-top: 16px; font-size: 13px; color: #999;">Coming soon → Pro subscription</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p><strong>ADS Weekly</strong> by Danbi Kim</p>
+  <p style="margin-top: 4px;">danbikim.github.io · ADS Framework v1.0</p>
+  <p style="margin-top: 12px; font-size: 11px; color: #bbb;">
+    Disclaimer: This is an analytical framework, not investment advice.<br>
+    The author may hold positions in securities mentioned. Do your own research.
+  </p>
+</div>
+
+</body>
+</html>
