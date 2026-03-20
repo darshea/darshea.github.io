@@ -4,8 +4,6 @@ export default function Home() {
   return (
     <div className="space-y-20 pt-2">
 
-      <h1 className="text-4xl font-semibold tracking-tight">Danbi Kim</h1>
-
       <section className="space-y-4">
         <p className="text-xs uppercase tracking-widest text-gray-400">ADS</p>
         <p className="text-sm text-gray-600 leading-relaxed">
@@ -25,17 +23,17 @@ export default function Home() {
         <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
           <p>Made in Moscow, raised in Seoul, based in Vancouver. Korean Canadian.</p>
           <p>
-            CS grad from SFU, currently a Management Reporting Analyst at Powerex (BC Hydro) —
-            building financial data pipelines and ML-powered anomaly detection. Before that:
-            data science at Pratt &amp; Whitney Canada, license plate detection at a Vancouver
-            startup, and automating legal workflows with Python at a law firm.
+            Started out building license plate recognition at my dad&apos;s company, then automated
+            paperwork at a law firm with Python. Did a co-op at Pratt &amp; Whitney figuring out
+            how to use AI to make airplane engine parts supply more reliable. Now at Powerex
+            (BC Hydro) — daily P&amp;L, financial data pipelines, catching bad data with ML, and
+            learning how energy markets work along the way. CS from SFU.
           </p>
           <p>
-            After hours I build things I want to exist. Right now that&apos;s an algorithmic gold
-            trading bot running 24/7, and a research tool that scores how AI will disrupt
-            public companies.
+            Right now I&apos;m also working on an algorithmic gold trading bot that runs 24/7, and
+            a scoring system that measures how AI will disrupt public companies.
           </p>
-          <p>Sundays are for church and kitchen volunteering.</p>
+          <p>Sundays are for church &amp; kitchen volunteering.</p>
         </div>
       </section>
 
