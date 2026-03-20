@@ -1,23 +1,44 @@
-import Link from 'next/link'
+export const metadata = { title: 'Danbi Kim' }
 
 export default function Home() {
   return (
-    <div className="pt-8">
-      <h1 className="text-4xl font-semibold tracking-tight mb-3">Danbi Kim</h1>
-      <p className="text-gray-500 text-lg mb-12">
-        Building systems that think about markets.
-      </p>
-      <nav className="flex gap-6 text-sm">
-        {['About', 'Projects', 'Blog', 'Contact'].map((label) => (
-          <Link
-            key={label}
-            href={`/${label.toLowerCase()}`}
-            className="text-black border-b border-black pb-0.5 hover:opacity-50 transition-opacity"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
+    <div className="space-y-20 pt-2">
+
+      <h1 className="text-4xl font-semibold tracking-tight">Danbi Kim</h1>
+
+      <section className="space-y-4">
+        <p className="text-xs uppercase tracking-widest text-gray-400">ADS</p>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          AI Displacement Score — an automated pipeline that researches public companies
+          and quantifies their exposure to AI disruption.
+        </p>
+        <a
+          href="/ads"
+          className="inline-block text-sm text-black border-b border-black pb-0.5 hover:opacity-40 transition-opacity"
+        >
+          View ADS →
+        </a>
+      </section>
+
+      <section className="space-y-6">
+        <p className="text-xs uppercase tracking-widest text-gray-400">About</p>
+        <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
+          <p>Made in Moscow, raised in Seoul, based in Vancouver. Korean Canadian.</p>
+          <p>
+            CS grad from SFU, currently a Management Reporting Analyst at Powerex (BC Hydro) —
+            building financial data pipelines and ML-powered anomaly detection. Before that:
+            data science at Pratt &amp; Whitney Canada, license plate detection at a Vancouver
+            startup, and automating legal workflows with Python at a law firm.
+          </p>
+          <p>
+            After hours I build things I want to exist. Right now that&apos;s an algorithmic gold
+            trading bot running 24/7, and a research tool that scores how AI will disrupt
+            public companies.
+          </p>
+          <p>Sundays are for church and kitchen volunteering.</p>
+        </div>
+      </section>
+
     </div>
   )
 }
