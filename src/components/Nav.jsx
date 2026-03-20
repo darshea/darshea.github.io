@@ -8,6 +8,9 @@ export default function Nav() {
           Danbi Kim
         </Link>
         <div className="flex gap-6">
+          <Link href="/about" className="text-sm text-gray-500 hover:text-black transition-colors">
+            About
+          </Link>
           <Link href="/ads" className="text-sm text-gray-500 hover:text-black transition-colors">
             ADS
           </Link>
