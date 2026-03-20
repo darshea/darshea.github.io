@@ -212,7 +212,7 @@ export default function ADS() {
             className="flex items-baseline justify-between border-t border-gray-100 py-4 group"
           >
             <span className="text-sm text-black group-hover:opacity-40 transition-opacity">
-              #1 — ServiceNow (NOW)
+              ISSUE #1
             </span>
             <span className="text-xs text-gray-400 shrink-0 ml-6">March 20, 2026</span>
           </a>
