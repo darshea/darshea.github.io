@@ -139,8 +139,12 @@ export default function ADS() {
         Latest Scores
       </h2>
       <div style={{ marginBottom: 48 }}>
+        <a href="/ads/weekly/issue-2/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <span style={{ fontSize: 14 }}>ISSUE #2 — 20 companies scored</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa' }}>March 25, 2026</span>
+        </a>
         <a href="/ads/weekly/issue-1/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
-          <span style={{ fontSize: 14 }}>ISSUE #1</span>
+          <span style={{ fontSize: 14 }}>ISSUE #1 — 10 companies scored</span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa' }}>March 20, 2026</span>
         </a>
         <div style={{ borderTop: '1px solid #f0f0f0' }} />

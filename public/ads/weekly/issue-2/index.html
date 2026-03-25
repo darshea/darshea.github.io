@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 480px;
+    margin: 0 auto 16px;
+    line-height: 1.6;
+  }
+  .header .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .intro {
+    background: #f8f8f8;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-top: 48px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .company-card {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child {
+    border-bottom: none;
+  }
+
+  .company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .company-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .company-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #999;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .score-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  .score-segment {
+    flex: 1;
+    height: 6px;
+    background: #f0f0f0;
+  }
+  .score-segment.filled { background: #1a1a1a; }
+
+  .dimensions {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .company-findings {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .company-findings strong { color: #1a1a1a; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 8px;
+  }
+  .badge-high { background: #fef2f2; color: #dc2626; }
+  .badge-med  { background: #fffbeb; color: #d97706; }
+  .badge-low  { background: #f0fdf4; color: #16a34a; }
+
+  .score-high { color: #dc2626; }
+  .score-med  { color: #d97706; }
+  .score-low  { color: #16a34a; }
+
+  .table-wrapper { overflow-x: auto; margin-bottom: 40px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888;
+    text-align: left;
+    padding: 8px 8px;
+    border-bottom: 2px solid #1a1a1a;
+    white-space: nowrap;
+  }
+  td { padding: 10px 8px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tr:hover td { background: #fafafa; }
+  .td-ticker { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+  .td-score { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; }
+
+  .cta {
+    text-align: center;
+    padding: 36px 32px;
+    background: #f8f8f8;
+    margin-top: 16px;
+  }
+  .cta .label { font-size: 13px; color: #999; margin-bottom: 6px; }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  .cta .sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .cta a {
+    display: inline-block;
+    padding: 11px 28px;
+    background: #1a1a1a;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .cta a:hover { background: #333; }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.8;
+  }
+  .footer a { color: #888; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">AI Displacement Score · Weekly</div>
+  <h1>Issue #2</h1>
+  <p class="subtitle">The AI Displacement Score (ADS) measures structural risk from AI disruption across five dimensions. This week we scored 10 companies making headlines for AI-driven workforce reductions, bringing our total coverage to 20 companies.</p>
+  <div class="date">March 25, 2026</div>
+</div>
+
+<div class="intro">
+  <strong>ADS scores companies 0–100</strong> across five dimensions: Labor Vulnerability, Revenue Durability, Pricing Power, Intermediation, and Adaptation Speed. Higher score = more AI displacement risk. Full findings, triggers, and five-dimension breakdowns are in the Pro report.
+</div>
+
+<div class="section-title">🔴 Most at Risk</div>
+<p style="font-size: 13px; color: #666; margin-bottom: 24px;">Top 5 from all 20 companies, highest ADS scores</p>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Chegg</span>
+      <span class="company-ticker">CHGG</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-high">90 <span class="badge badge-high">HIGH</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 90 | D2: 90 | D3: 90 | D4: 100 | D5: 80</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> ChatGPT directly substituting core homework-help product; subscriber decline from 8M to 3.2M; Skilling pivot fatally under-scaled.<br>
+    <strong>Key trigger:</strong> Academic segment approaching near-zero before Skilling can compensate
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">UPS</span>
+      <span class="company-ticker">UPS</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-high">72 <span class="badge badge-high">HIGH</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 80 | D2: 60 | D3: 70 | D4: 80 | D5: 70</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> 78,000 job eliminations (16% workforce); Amazon actively disintermediating (50% volume reduction); margin compressed 170bps despite price increases.<br>
+    <strong>Key trigger:</strong> Amazon Logistics expansion cutting UPS's largest customer relationship
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Upwork</span>
+      <span class="company-ticker">UPWK</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-med">68 <span class="badge badge-med">MEDIUM</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 90 | D2: 70 | D3: 50 | D4: 80 | D5: 50</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> 45% of GSV at direct AI substitution risk; revenue growth is monetization artifact; only payment processing carries durable advantage.<br>
+    <strong>Key trigger:</strong> AI coding agents eliminating demand for freelance software development
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Atlassian</span>
+      <span class="company-ticker">TEAM</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-med">67 <span class="badge badge-med">MEDIUM</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 72 | D2: 65 | D3: 68 | D4: 71 | D5: 61</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> 1,600 R&D cuts (56% from engineering) while claiming AI-first; third workforce cut in 2 years; GitHub Copilot + Linear bypassing Jira.<br>
+    <strong>Key trigger:</strong> CTO replacement mid-pivot signals execution chaos
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Amazon</span>
+      <span class="company-ticker">AMZN</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-med">67 <span class="badge badge-med">MEDIUM</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 78 | D2: 72 | D3: 68 | D4: 74 | D5: 42</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> 30,000 corporate cuts in Q1 2026; 750K+ robots handling 75% of orders; AWS losing share to Azure/Google Cloud.<br>
+    <strong>Key trigger:</strong> $50B OpenAI partnership signals AWS was losing model wars
+  </div>
+</div>
+
+<div class="section-title">🟢 Best Positioned</div>
+<p style="font-size: 13px; color: #666; margin-bottom: 24px;">Bottom 5 from all 20 companies, lowest ADS scores</p>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">NVIDIA</span>
+      <span class="company-ticker">NVDA</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-low">24 <span class="badge badge-low">LOW</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 20 | D2: 40 | D3: 30 | D4: 20 | D5: 10</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> AI infrastructure monopoly; 80%+ GPU market share; every AI displacement event increases demand for NVIDIA hardware.<br>
+    <strong>Key trigger:</strong> Continued hyperscaler capex acceleration ($600B+ in 2026)
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">ServiceNow</span>
+      <span class="company-ticker">NOW</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-low">28 <span class="badge badge-low">LOW</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 40 | D2: 20 | D3: 30 | D4: 30 | D5: 20</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> Now Assist driving AI monetization; deep enterprise workflow integration; high switching costs.<br>
+    <strong>Key trigger:</strong> Now Assist adoption metrics proving AI-native value add
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Meta</span>
+      <span class="company-ticker">META</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-low">32 <span class="badge badge-low">LOW</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 50 | D2: 30 | D3: 30 | D4: 30 | D5: 20</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> AI-powered ad targeting driving revenue growth; massive AI infrastructure investment; LLaMA open-source strategy.<br>
+    <strong>Key trigger:</strong> AI recommendation engine driving engagement growth
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Intuit</span>
+      <span class="company-ticker">INTU</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-low">34 <span class="badge badge-low">LOW</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 50 | D2: 30 | D3: 20 | D4: 40 | D5: 30</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> TurboTax and QuickBooks deeply embedded; AI assistant enhancing rather than displacing; regulatory moat in tax.<br>
+    <strong>Key trigger:</strong> AI augmenting core products rather than enabling bypass
+  </div>
+</div>
+
+<div class="company-card">
+  <div class="company-header">
+    <div>
+      <span class="company-name">Salesforce</span>
+      <span class="company-ticker">CRM</span>
+    </div>
+    <div style="text-align: right;">
+      <div class="company-score score-low">36 <span class="badge badge-low">LOW</span></div>
+    </div>
+  </div>
+  <div class="dimensions">D1: 60 | D2: 30 | D3: 30 | D4: 30 | D5: 30</div>
+  <div class="company-findings">
+    <strong>Key findings:</strong> Agentforce pivot real but early; deep CRM data moat; high switching costs.<br>
+    <strong>Key trigger:</strong> Agentforce adoption determining long-term platform relevance
+  </div>
+</div>
+
+<div class="section-title">📊 Full Comparison Table</div>
+<p style="font-size: 13px; color: #666; margin-bottom: 24px;">All 20 companies ranked by ADS score</p>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Company</th>
+        <th>Ticker</th>
+        <th>ADS</th>
+        <th>Risk</th>
+        <th>D1</th>
+        <th>D2</th>
+        <th>D3</th>
+        <th>D4</th>
+        <th>D5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center;">1</td>
+        <td>Chegg</td>
+        <td class="td-ticker">CHGG</td>
+        <td class="td-score score-high">90</td>
+        <td><span class="badge badge-high">HIGH</span></td>
+        <td style="text-align:center;font-size:12px;">90</td>
+        <td style="text-align:center;font-size:12px;">90</td>
+        <td style="text-align:center;font-size:12px;">90</td>
+        <td style="text-align:center;font-size:12px;">100</td>
+        <td style="text-align:center;font-size:12px;">80</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">2</td>
+        <td>UPS</td>
+        <td class="td-ticker">UPS</td>
+        <td class="td-score score-high">72</td>
+        <td><span class="badge badge-high">HIGH</span></td>
+        <td style="text-align:center;font-size:12px;">80</td>
+        <td style="text-align:center;font-size:12px;">60</td>
+        <td style="text-align:center;font-size:12px;">70</td>
+        <td style="text-align:center;font-size:12px;">80</td>
+        <td style="text-align:center;font-size:12px;">70</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">3</td>
+        <td>Upwork</td>
+        <td class="td-ticker">UPWK</td>
+        <td class="td-score score-med">68</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">90</td>
+        <td style="text-align:center;font-size:12px;">70</td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">80</td>
+        <td style="text-align:center;font-size:12px;">50</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">4</td>
+        <td>Atlassian</td>
+        <td class="td-ticker">TEAM</td>
+        <td class="td-score score-med">67</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">65</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">71</td>
+        <td style="text-align:center;font-size:12px;">61</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">5</td>
+        <td>Amazon</td>
+        <td class="td-ticker">AMZN</td>
+        <td class="td-score score-med">67</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">78</td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">74</td>
+        <td style="text-align:center;font-size:12px;">42</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">6</td>
+        <td>Accenture</td>
+        <td class="td-ticker">ACN</td>
+        <td class="td-score score-med">67</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">73</td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">75</td>
+        <td style="text-align:center;font-size:12px;">70</td>
+        <td style="text-align:center;font-size:12px;">45</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">7</td>
+        <td>eBay</td>
+        <td class="td-ticker">EBAY</td>
+        <td class="td-score score-med">66</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">70</td>
+        <td style="text-align:center;font-size:12px;">65</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">55</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">8</td>
+        <td>Block</td>
+        <td class="td-ticker">SQ</td>
+        <td class="td-score score-med">65</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">82</td>
+        <td style="text-align:center;font-size:12px;">71</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">76</td>
+        <td style="text-align:center;font-size:12px;">28</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">9</td>
+        <td>Shopify</td>
+        <td class="td-ticker">SHOP</td>
+        <td class="td-score score-med">64</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">75</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">76</td>
+        <td style="text-align:center;font-size:12px;">28</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">10</td>
+        <td>Duolingo</td>
+        <td class="td-ticker">DUOL</td>
+        <td class="td-score score-med">63</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">71</td>
+        <td style="text-align:center;font-size:12px;">76</td>
+        <td style="text-align:center;font-size:12px;">28</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">11</td>
+        <td>Pinterest</td>
+        <td class="td-ticker">PINS</td>
+        <td class="td-score score-med">62</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">72</td>
+        <td style="text-align:center;font-size:12px;">64</td>
+        <td style="text-align:center;font-size:12px;">78</td>
+        <td style="text-align:center;font-size:12px;">62</td>
+        <td style="text-align:center;font-size:12px;">35</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">12</td>
+        <td>Dell</td>
+        <td class="td-ticker">DELL</td>
+        <td class="td-score score-med">62</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">75</td>
+        <td style="text-align:center;font-size:12px;">68</td>
+        <td style="text-align:center;font-size:12px;">64</td>
+        <td style="text-align:center;font-size:12px;">58</td>
+        <td style="text-align:center;font-size:12px;">39</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">13</td>
+        <td>UiPath</td>
+        <td class="td-ticker">PATH</td>
+        <td class="td-score score-med">52</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">60</td>
+        <td style="text-align:center;font-size:12px;">60</td>
+        <td style="text-align:center;font-size:12px;">40</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">14</td>
+        <td>Alphabet</td>
+        <td class="td-ticker">GOOGL</td>
+        <td class="td-score score-med">40</td>
+        <td><span class="badge badge-med">MEDIUM</span></td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">70</td>
+        <td style="text-align:center;font-size:12px;">20</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">15</td>
+        <td>Workday</td>
+        <td class="td-ticker">WDAY</td>
+        <td class="td-score score-low">36</td>
+        <td><span class="badge badge-low">LOW</span></td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">40</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">16</td>
+        <td>Salesforce</td>
+        <td class="td-ticker">CRM</td>
+        <td class="td-score score-low">36</td>
+        <td><span class="badge badge-low">LOW</span></td>
+        <td style="text-align:center;font-size:12px;">60</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">17</td>
+        <td>Intuit</td>
+        <td class="td-ticker">INTU</td>
+        <td class="td-score score-low">34</td>
+        <td><span class="badge badge-low">LOW</span></td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">20</td>
+        <td style="text-align:center;font-size:12px;">40</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">18</td>
+        <td>Meta</td>
+        <td class="td-ticker">META</td>
+        <td class="td-score score-low">32</td>
+        <td><span class="badge badge-low">LOW</span></td>
+        <td style="text-align:center;font-size:12px;">50</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">20</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">19</td>
+        <td>ServiceNow</td>
+        <td class="td-ticker">NOW</td>
+        <td class="td-score score-low">28</td>
+        <td><span class="badge badge-low">LOW</span></td>
+        <td style="text-align:center;font-size:12px;">40</td>
+        <td style="text-align:center;font-size:12px;">20</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">20</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">20</td>
+        <td>NVIDIA</td>
+        <td class="td-ticker">NVDA</td>
+        <td class="td-score score-low">24</td>
+        <td><span class="badge badge-low">LOW</span></td>
+        <td style="text-align:center;font-size:12px;">20</td>
+        <td style="text-align:center;font-size:12px;">40</td>
+        <td style="text-align:center;font-size:12px;">30</td>
+        <td style="text-align:center;font-size:12px;">20</td>
+        <td style="text-align:center;font-size:12px;">10</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cta">
+  <div class="label">Pro — $19/month</div>
+  <div class="headline">Full report on Substack</div>
+  <div class="sub">Five-dimension breakdown · Key findings · Trigger analysis · SEC-sourced data</div>
+  <a href="https://danbikim1.substack.com/subscribe">Read the full report →</a>
+  <div style="margin-top:24px;">
+    <iframe src="https://danbikim1.substack.com/embed" width="100%" height="150" style="border:1px solid #e0e0e0;background:white;max-width:480px;" frameborder="0" scrolling="no"></iframe>
+  </div>
+</div>
+
+<div class="footer">
+  <p><a href="https://darshea.github.io/ads">AI Displacement Score</a> by <a href="https://darshea.github.io">Danbi Kim</a></p>
+  <p style="margin-top:8px;">This is an analytical framework, not investment advice.</p>
+</div>
+
+</body>
+</html>
