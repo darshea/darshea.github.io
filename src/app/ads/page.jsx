@@ -33,7 +33,7 @@ export default function ADS() {
             View latest scores
           </a>
           <a href={SUBSTACK_URL} style={{ fontSize: 14, color: '#555', border: '1px solid #ddd', padding: '10px 24px', textDecoration: 'none' }}>
-            Subscribe (Free)
+            Subscribe — $19/mo
           </a>
         </div>
       </div>
@@ -180,8 +180,8 @@ export default function ADS() {
         </div>
         <div style={{ border: '1px solid #1a1a1a', padding: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12 }}>
-            <p style={{ fontSize: 14, fontWeight: 600 }}>Full Reports</p>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa' }}>Free</span>
+            <p style={{ fontSize: 14, fontWeight: 600 }}>Pro</p>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa' }}>$19/month</span>
           </div>
           <ul style={{ listStyle: 'none', padding: 0, fontSize: 13, color: '#666', marginBottom: 16 }}>
             {['Full methodology report per company', 'SEC-sourced data, five-dimension breakdown with supporting inputs', 'Competitive landscape and trigger analysis'].map((item) => (
