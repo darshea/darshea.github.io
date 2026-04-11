@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — All Issues</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .issue-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.1s;
+  }
+  .issue-card:hover { background: #fafafa; padding-left: 8px; transition: padding 0.15s; }
+  .issue-card:last-child { border-bottom: none; }
+
+  .issue-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .issue-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .issue-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+  }
+  .issue-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 6px;
+    color: #1a1a1a;
+  }
+  .issue-desc {
+    font-size: 13.5px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .issue-tickers {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 0.3px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .badge-high { background: #fef2f2; color: #dc2626; }
+  .badge-med  { background: #fffbeb; color: #d97706; }
+  .badge-low  { background: #f0fdf4; color: #16a34a; }
+
+  .stats-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    padding: 24px;
+    background: #f8f8f8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #555;
+  }
+  .stat { text-align: center; flex: 1; }
+  .stat-value { font-size: 22px; font-weight: 700; color: #1a1a1a; display: block; }
+  .stat-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+
+  .cta {
+    text-align: center;
+    padding: 36px 32px;
+    background: #f8f8f8;
+    margin-top: 40px;
+  }
+  .cta .label { font-size: 13px; color: #999; margin-bottom: 6px; }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  .cta .sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .cta a {
+    display: inline-block;
+    padding: 11px 28px;
+    background: #1a1a1a;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .cta a:hover { background: #333; }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.8;
+  }
+  .footer a { color: #888; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">AI Displacement Score</div>
+  <h1>Weekly Issues</h1>
+  <p class="subtitle">Measuring structural AI displacement risk in public equities. 40 companies scored across Issues #1–4.</p>
+</div>
+
+<!-- ISSUE 4 -->
+<a class="issue-card" href="/ads/weekly/issue-4/">
+  <div class="issue-meta">
+    <span class="issue-number">Issue #4</span>
+    <span class="issue-date">April 8, 2026</span>
+  </div>
+  <div class="issue-title">The Great Labor Displacement</div>
+  <div class="issue-desc">From temp agency to tax office — three staffing firms score HIGH (72–74). Intel's Terafab ($25B with SpaceX/Tesla/xAI) and Microsoft's $625B backlog confirm the AI infrastructure layer as the sector's most durable position.</div>
+  <div class="issue-tickers">
+    KELYA <span class="badge badge-high">74</span> ·
+    CNXC <span class="badge badge-high">72</span> ·
+    RHI <span class="badge badge-high">72</span> ·
+    HRB <span class="badge badge-med">56</span> ·
+    EPAM <span class="badge badge-med">54</span> ·
+    EXPE <span class="badge badge-med">52</span> ·
+    C <span class="badge badge-med">46</span> ·
+    INTC <span class="badge badge-low">38</span> ·
+    ABNB <span class="badge badge-low">38</span> ·
+    MSFT <span class="badge badge-low">22</span>
+  </div>
+</a>
+
+<!-- ISSUE 3 -->
+<a class="issue-card" href="/ads/weekly/issue-3/">
+  <div class="issue-meta">
+    <span class="issue-number">Issue #3</span>
+    <span class="issue-date">April 1, 2026</span>
+  </div>
+  <div class="issue-title">The Great Bifurcation</div>
+  <div class="issue-desc">AI victims vs. AI infrastructure. Fiverr, ManpowerGroup, and C3.ai score 76/100 each — existential risk. Palantir (28) and Broadcom (32) are structural AI beneficiaries. Three investment-grade credits at structural risk on a 3–5 year horizon.</div>
+  <div class="issue-tickers">
+    FVRR <span class="badge badge-high">76</span> ·
+    MAN <span class="badge badge-high">76</span> ·
+    AI <span class="badge badge-high">76</span> ·
+    CTSH <span class="badge badge-high">68</span> ·
+    ORCL <span class="badge badge-med">58</span> ·
+    IBM <span class="badge badge-med">48</span> ·
+    CSCO <span class="badge badge-med">48</span> ·
+    ADP <span class="badge badge-med">40</span> ·
+    AVGO <span class="badge badge-low">32</span> ·
+    PLTR <span class="badge badge-low">28</span>
+  </div>
+</a>
+
+<!-- ISSUE 2 -->
+<a class="issue-card" href="/ads/weekly/issue-2/">
+  <div class="issue-meta">
+    <span class="issue-number">Issue #2</span>
+    <span class="issue-date">March 30, 2026</span>
+  </div>
+  <div class="issue-title">Platforms Under Pressure</div>
+  <div class="issue-desc">UPS eliminates 78,000 jobs while revenue declines. Amazon loses model wars to Azure. Atlassian cuts 56% of R&D. Shopify, Duolingo, and Pinterest adapt aggressively while structural risk mounts.</div>
+  <div class="issue-tickers">
+    UPS <span class="badge badge-high">72</span> ·
+    TEAM <span class="badge badge-med">67</span> ·
+    AMZN <span class="badge badge-med">67</span> ·
+    ACN <span class="badge badge-med">67</span> ·
+    EBAY <span class="badge badge-med">66</span> ·
+    SQ <span class="badge badge-med">65</span> ·
+    SHOP <span class="badge badge-med">64</span> ·
+    DUOL <span class="badge badge-med">63</span> ·
+    PINS <span class="badge badge-med">62</span> ·
+    DELL <span class="badge badge-med">62</span>
+  </div>
+</a>
+
+<!-- ISSUE 1 -->
+<a class="issue-card" href="/ads/weekly/issue-1/">
+  <div class="issue-meta">
+    <span class="issue-number">Issue #1</span>
+    <span class="issue-date">March 20, 2026</span>
+  </div>
+  <div class="issue-title">The First Cut</div>
+  <div class="issue-desc">The inaugural ADS scoring. Chegg scores 90/100 — highest displacement risk in the universe. Upwork at 68. Alphabet, Salesforce, Workday, and Intuit in the middle. NVIDIA (24) and ServiceNow (28) are structural beneficiaries.</div>
+  <div class="issue-tickers">
+    CHGG <span class="badge badge-high">90</span> ·
+    UPWK <span class="badge badge-high">68</span> ·
+    PATH <span class="badge badge-med">52</span> ·
+    GOOGL <span class="badge badge-med">40</span> ·
+    WDAY <span class="badge badge-low">36</span> ·
+    CRM <span class="badge badge-low">36</span> ·
+    INTU <span class="badge badge-low">34</span> ·
+    META <span class="badge badge-low">32</span> ·
+    NOW <span class="badge badge-low">28</span> ·
+    NVDA <span class="badge badge-low">24</span>
+  </div>
+</a>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat">
+    <span class="stat-value">40</span>
+    <span class="stat-label">Companies Scored</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">4</span>
+    <span class="stat-label">Issues Published</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">90</span>
+    <span class="stat-label">Highest Score (CHGG)</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">22</span>
+    <span class="stat-label">Lowest Score (MSFT)</span>
+  </div>
+</div>
+
+<div class="cta">
+  <div class="label">Pro — $19/month</div>
+  <div class="headline">Full deep-dives on Substack</div>
+  <div class="sub">Complete D1–D5 analysis · SEC-sourced data · Credit outlook · Weekly updates</div>
+  <a href="https://danbikim1.substack.com/subscribe">Subscribe for Pro reports →</a>
+  <div style="margin-top:24px;">
+    <iframe src="https://danbikim1.substack.com/embed" width="100%" height="150" style="border:1px solid #e0e0e0;background:white;max-width:480px;" frameborder="0" scrolling="no"></iframe>
+  </div>
+</div>
+
+<div class="footer">
+  <p><a href="https://danbikim.github.io/ads">AI Displacement Score</a> by <a href="https://danbikim.github.io">Danbi Kim</a></p>
+  <p style="margin-top:4px;"><a href="https://danbikim1.substack.com">Substack</a></p>
+  <p style="margin-top:8px;">This is an analytical framework, not investment advice.</p>
+  <p style="margin-top:4px;">ADS Framework v1.0</p>
+</div>
+
+</body>
+</html>
