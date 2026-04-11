@@ -138,16 +138,31 @@ export default function ADS() {
       <h2 id="scores" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 24, fontWeight: 400, marginBottom: 24, paddingBottom: 12, borderBottom: '2px solid #1a1a1a' }}>
         Latest Scores
       </h2>
-      <div style={{ marginBottom: 48 }}>
+      <div style={{ marginBottom: 16 }}>
+        <a href="/ads/weekly/issue-4/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <div>
+            <span style={{ fontSize: 14 }}>ISSUE #4 — The Great Labor Displacement</span>
+            <span style={{ display: 'inline-block', marginLeft: 10, padding: '1px 7px', borderRadius: 3, fontSize: 10, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", background: '#fef2f2', color: '#dc2626' }}>NEW</span>
+          </div>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>April 8, 2026</span>
+        </a>
+        <a href="/ads/weekly/issue-3/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <span style={{ fontSize: 14 }}>ISSUE #3 — The Great Bifurcation</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>April 1, 2026</span>
+        </a>
         <a href="/ads/weekly/issue-2/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
           <span style={{ fontSize: 14 }}>ISSUE #2 — 20 companies scored</span>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa' }}>March 25, 2026</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>March 25, 2026</span>
         </a>
         <a href="/ads/weekly/issue-1/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
           <span style={{ fontSize: 14 }}>ISSUE #1 — 10 companies scored</span>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa' }}>March 20, 2026</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>March 20, 2026</span>
         </a>
-        <div style={{ borderTop: '1px solid #f0f0f0' }} />
+        <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 12, marginTop: 4 }}>
+          <a href="/ads/weekly/" style={{ fontSize: 13, color: '#888', textDecoration: 'none', fontFamily: "'JetBrains Mono', monospace" }}>
+            View all issues →
+          </a>
+        </div>
       </div>
 
       {/* What You Get */}
