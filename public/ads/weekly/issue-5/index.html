@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #5 | April 15, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef3e6; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+  .dim span { font-weight: 700; color: #333; }
+
+  .company-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .company-card ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .company-card li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 4px;
+  }
+
+  .trigger {
+    background: #f8f8f8;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .comparison td {
+    padding: 8px 8px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+  .td-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">ADS Weekly · Issue #5</div>
+  <h1>The AI Economy's Winners and Losers</h1>
+  <p class="subtitle">April 15, 2026 · 10 companies scored · From BPO disruption to quantum opportunity</p>
+</div>
+
+<div class="intro">
+  This week spans the full spectrum of AI displacement. <strong>Conduent (70) and ZipRecruiter (70)</strong> join the HIGH risk tier — BPO processing and job boards face the same structural headwinds as staffing firms. <strong>IonQ (38) and Vistra (34)</strong> score LOW — quantum computing infrastructure and power generation are among the most AI-resistant business models in the public market. Six companies land in MEDIUM, including Uber's autonomous vehicle reckoning and The Trade Desk's post-earnings-miss AI pivot test.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- CNDT -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Conduent</span>
+    <span class="company-score score-high">70<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">CNDT · Business Process Outsourcing · Market Cap ~$150M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>90</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>54,000 employees processing healthcare claims, government payments, and call center operations — the highest-density AI-automatable workforce profile in this week's batch. O*NET maps 65-75% of roles to high AI exposure.</li>
+    <li>Revenue has declined ~10% in two years ($3.78B → $3.4B) with Moody's B2 speculative-grade rating. The 2026-2027 contract rebid cycle puts the largest government accounts at risk from AI-enabled competitors offering 30-40% cost reductions.</li>
+    <li>The 2025 data breach (25M patient records) further weakens competitive position at a critical juncture when trust is the primary remaining moat.</li>
+  </ul>
+  <div class="trigger">Key trigger: Peak government contract rebid cycle in 2026-2027 — if AI-enabled BPO competitors win at 30-40% cost advantage, Conduent faces covenant risk on its $1.2B net debt within 24 months.</div>
+</div>
+
+<!-- ZIP -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">ZipRecruiter</span>
+    <span class="company-score score-high">70<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">ZIP · Online Recruitment / Job Board · Market Cap ~$330M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>80</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Revenue has declined 58% from peak ($887M → ~$370M in 3 years) as AI automation eliminates the entry-level, administrative, and service roles that drive SMB job posting volume — the platform's core use case.</li>
+    <li>$575M convertible notes due 2028 creates existential refinancing risk if revenue doesn't stabilize. At $1.98/share (96% below 2021 peak), equity markets are pricing structural impairment.</li>
+    <li>The job board intermediation layer is among the thinnest in digital marketplaces — LinkedIn Recruiter AI, Eightfold.ai, and Paradox's Olivia AI match candidates without job boards entirely.</li>
+  </ul>
+  <div class="trigger">Key trigger: 2028 convertible note maturity ($575M). If revenue doesn't stabilize above ~$350M by 2027, refinancing at acceptable terms becomes structurally difficult.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- TWLO -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Twilio</span>
+    <span class="company-score score-med">62<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">TWLO · Communications Platform (CPaaS) · Market Cap ~$20B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>NRR declined from 125% to 101% in three years — approaching the churn break-even threshold and signaling that existing customers are using fewer Twilio services as AI alternatives absorb use cases.</li>
+    <li>OpenAI Realtime API and ElevenLabs create AI-to-human voice pipelines via WebRTC, bypassing Twilio's programmable voice layer entirely. The developer community is shifting from CPaaS to LLM APIs.</li>
+    <li>$1.4B cash, no significant debt provides runway. CustomerAI (AI layer on Segment data) is the right strategic bet — but unproven commercially. The $3.2B Segment acquisition has yet to deliver expected synergies.</li>
+  </ul>
+</div>
+
+<!-- ANGI -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Angi</span>
+    <span class="company-score score-med">62<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">ANGI · Home Services Marketplace · Market Cap ~$1.1B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Revenue declined 39% from peak ($1.90B → ~$1.15B) while remaining loss-making, with Google Local Services Ads and Amazon Home Services taking share through AI-matched, zero-lead-fee models.</li>
+    <li>Customer service workforce cuts mirror Block's February 2026 AI-driven 40% reduction — same AI customer service economics, just at smaller scale. Angi is replacing the labor it has, but not transforming the business model.</li>
+    <li>IAC's restructuring signals insufficient standalone strategic positioning — M&A outcome (divest, merge, privatize) represents a non-ADS wildcard.</li>
+  </ul>
+</div>
+
+<!-- UBER -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Uber Technologies</span>
+    <span class="company-score score-med">62<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">UBER · Ridesharing / Delivery Platform · Market Cap ~$160B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>70</span></div>
+  </div>
+  <ul>
+    <li>Near-term fundamentals are excellent (gross bookings +21% YoY to ~$177B) but 5.4M driver-partners face autonomous vehicle displacement from Waymo (200K+ weekly rides), Tesla Robotaxi, and Zoox — with a 3-7 year horizon before material impact.</li>
+    <li>Uber is one of the better-adapting companies in this week's batch: Waymo rides already bookable on Uber app in SF/Phoenix, Claude Code and Cursor deployed to 80%+ of engineers, and CEO Dara Khosrowshahi's "marketplace for mobility" strategy is credible regardless of vehicle type.</li>
+    <li>The ADS score (62) reflects not current distress but the long-term trajectory: once Waymo/Tesla reach 10%+ of urban rideshare, Uber's take rate and driver network lock-in require fundamental business model adaptation.</li>
+  </ul>
+</div>
+
+<!-- DBX -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Dropbox</span>
+    <span class="company-score score-med">58<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">DBX · Cloud Storage / Productivity · Market Cap ~$5.4B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>ARR of ~$2.55B growing only 1-2% annually as Microsoft OneDrive (free with M365) and Google Drive (free with Workspace) bundle cloud storage into enterprise contracts, effectively pricing Dropbox out of the market.</li>
+    <li>Dropbox Dash (AI search/organization) is the right strategic bet but faces Microsoft Copilot as the most formidable possible competitor — and Copilot is already in the hands of every M365 enterprise customer.</li>
+    <li>Clean balance sheet ($497M net cash) provides runway, but the fundamental question remains: if users can search all their files natively in Windows/M365/Workspace, why pay $12-20/month for Dropbox?</li>
+  </ul>
+</div>
+
+<!-- TTD -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">The Trade Desk</span>
+    <span class="company-score score-med">58<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">TTD · Programmatic Advertising (DSP) · Market Cap ~$10B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>70</span></div>
+  </div>
+  <ul>
+    <li>Q4 2025 revenue miss triggered a 40%+ single-day stock decline from $91 to $52 — the company's first major execution failure after 10+ years of consistent growth, raising questions about whether programmatic advertising is plateauing.</li>
+    <li>Google PMax, Amazon Performance+, and Meta Advantage+ now offer AI-optimized campaign management that achieves comparable ROAS without an independent DSP, weakening The Trade Desk's core value proposition.</li>
+    <li>Kokai AI (automated campaign optimization) and Unified ID 2.0 are genuine differentiators, but the Q4 miss has put the burden of proof on H1 2026 results. At $21/share vs. $91 peak, the market has priced significant risk.</li>
+  </ul>
+</div>
+
+<!-- SNOW -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Snowflake</span>
+    <span class="company-score score-med">54<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">SNOW · Data Cloud / Analytics · Market Cap ~$50B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>40</span></div>
+    <div class="dim">D5 <span>80</span></div>
+  </div>
+  <ul>
+    <li>NRR declined from 158% (FY2022) to 127% (FY2025) as Databricks wins AI/ML-heavy workloads and Apache Iceberg interoperability reduces proprietary lock-in — but 127% NRR is still excellent for a $3.5B ARR company.</li>
+    <li>CEO Sridhar Ramaswamy (ex-Google Neeva) is executing one of enterprise software's strongest AI pivots: Snowflake Cortex AI (35%+ customer adoption), Arctic LLM, Document AI, and Snowpark ML represent a genuine AI-first transformation.</li>
+    <li>The "data platform for AI" thesis is larger than traditional data warehousing — if Cortex AI accelerates, Snowflake's TAM expands meaningfully. ADS score reflects competitive pressure, not strategic failure.</li>
+  </ul>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- IONQ -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">IonQ</span>
+    <span class="company-score score-low">38<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">IONQ · Quantum Computing Infrastructure · Market Cap ~$7B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>80</span></div>
+  </div>
+  <ul>
+    <li>Stock surged 19% in April 2026 on DARPA Quantum Benchmarking Initiative contract win and QuantumBasel partnership expansion to $60M+. IonQ's 5th-generation AQ-35 system represents best-in-class trapped-ion performance.</li>
+    <li>IonQ is the inverse ADS case: a company that benefits from the AI era (quantum is the next compute paradigm) with a workforce (200-250 trapped-ion physicists and quantum engineers) that represents the frontier of non-automatable human knowledge.</li>
+    <li>FY2026 guidance of $225M-$245M represents an inflection from research-phase to commercial deployment. The SkyWater Technology acquisition adds domestic semiconductor manufacturing capability for scale.</li>
+  </ul>
+  <div class="trigger">Key context: IonQ is scored as a portfolio reference point — it represents the category of quantum infrastructure beneficiaries that are structurally uncorrelated with AI displacement risk.</div>
+</div>
+
+<!-- VST -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Vistra Corp.</span>
+    <span class="company-score score-low">34<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">VST · Power Generation / Energy · Market Cap ~$40B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>Vistra's April 2026 $4B acquisition of a 6GW gas-fired power fleet is explicitly targeting AI data center demand — ERCOT Texas alone has 30GW+ of data center capacity in development, creating structural power supply shortfall.</li>
+    <li>Physical power generation is the hardest category to disintermediate via AI or software — grid interconnection queues run 4-7 years, and the electron cannot be virtualized. Physical infrastructure IS the moat.</li>
+    <li>AI data center electricity demand (IEA: 415 TWh in 2024 → 945 TWh by 2030) means Vistra's dispatchable gas capacity is increasingly valuable as renewables add grid variability requiring reliable backup generation.</li>
+  </ul>
+  <div class="trigger">Key context: Like IonQ, Vistra is a structural AI era beneficiary — scored as a reference point for the credit investor audience to understand which sectors face ZERO displacement risk from AI.</div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section-label">📊 Issue #5 Comparison Table</div>
+<table class="comparison">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-ticker">CNDT</td><td>Conduent</td><td class="td-score score-high">70</td><td><span class="badge badge-high">HIGH</span></td><td class="td-dim">90</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">40</td><td class="td-price">$1.51</td></tr>
+    <tr><td class="td-ticker">ZIP</td><td>ZipRecruiter</td><td class="td-score score-high">70</td><td><span class="badge badge-high">HIGH</span></td><td class="td-dim">80</td><td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">40</td><td class="td-price">$1.98</td></tr>
+    <tr><td class="td-ticker">TWLO</td><td>Twilio</td><td class="td-score score-med">62</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">50</td><td class="td-price">$117.65</td></tr>
+    <tr><td class="td-ticker">ANGI</td><td>Angi</td><td class="td-score score-med">62</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">40</td><td class="td-price">$7.35</td></tr>
+    <tr><td class="td-ticker">UBER</td><td>Uber</td><td class="td-score score-med">62</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">70</td><td class="td-dim">40</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-price">$71.00</td></tr>
+    <tr><td class="td-ticker">DBX</td><td>Dropbox</td><td class="td-score score-med">58</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">60</td><td class="td-price">$22.70</td></tr>
+    <tr><td class="td-ticker">TTD</td><td>The Trade Desk</td><td class="td-score score-med">58</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-price">$21.23</td></tr>
+    <tr><td class="td-ticker">SNOW</td><td>Snowflake</td><td class="td-score score-med">54</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">40</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">40</td><td class="td-dim">80</td><td class="td-price">$148.61</td></tr>
+    <tr><td class="td-ticker">IONQ</td><td>IonQ</td><td class="td-score score-low">38</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">20</td><td class="td-dim">50</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">80</td><td class="td-price">$36.59</td></tr>
+    <tr><td class="td-ticker">VST</td><td>Vistra</td><td class="td-score score-low">34</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">30</td><td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">60</td><td class="td-price">$155.48</td></tr>
+  </tbody>
+</table>
+
+<div class="cta">
+  <div class="label">Free on Substack</div>
+  <div class="headline">Subscribe for weekly ADS scores</div>
+  <p>Deep-dives, methodology updates, and the cumulative ADS tracker with 50 companies scored.</p>
+  <a href="https://danbikim.substack.com" target="_blank">Subscribe Free →</a>
+</div>
+
+<div class="footer">
+  <p><strong>IMPORTANT DISCLOSURES:</strong> ADS scores are for informational purposes only and do not constitute investment advice. No buy, sell, or hold recommendations are made. Scores reflect AI displacement risk assessment methodology v1.0 as of April 2026.</p>
+  <br>
+  <p><a href="/ads/weekly/">← All Issues</a> · <a href="/">danbikim.github.io</a> · <a href="https://danbikim.substack.com">Substack</a></p>
+  <br>
+  <p>AI Displacement Score by Danbi Kim · danbikim.github.io/ads · April 2026</p>
+</div>
+
+</body>
+</html>
