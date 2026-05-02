@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #6 | April 22, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef3e6; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+  .dim span { font-weight: 700; color: #333; }
+
+  .company-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .company-card ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .company-card li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 4px;
+  }
+
+  .trigger {
+    background: #f8f8f8;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .comparison td {
+    padding: 8px 8px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+  .td-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">ADS Weekly · Issue #6</div>
+  <h1>The AI Economy's Infrastructure Layer</h1>
+  <p class="subtitle">April 22, 2026 · 10 companies scored · From nuclear power to voice AI — who builds the atoms AI runs on, and who gets displaced</p>
+</div>
+
+<div class="intro">
+  This week spans the full displacement spectrum. <strong>TTEC Holdings (68) and LivePerson (68)</strong> lead the HIGH tier — CX outsourcing and conversational AI platforms face terminal disruption dynamics. <strong>Taiwan Semiconductor (26) and Constellation Energy (28)</strong> score near the ADS floor — physical infrastructure that AI runs on, not through. The week's central irony: <strong>LivePerson</strong>, a company that sells conversational AI, is being disrupted by conversational AI — one of the clearest self-referential displacement cases the framework has scored.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- TTEC -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">TTEC Holdings</span>
+    <span class="company-score score-high">68<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">TTEC · Customer Experience Outsourcing / BPO · Market Cap ~$132M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>90</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>~48,000 employees predominantly in the Engage contact center segment — O*NET places customer service representatives at 62-78% AI automation exposure. Offshore geography (Philippines, India, Jamaica) provides zero cost immunity against AI voice agents.</li>
+    <li>The CEO's $6.85/share take-private attempt (2024, withdrawn 2025) is a damning credit market signal: lenders refused to finance a buyout at any premium to distressed prices. Stock is now at $2.72 — 60% below the withdrawn offer price.</li>
+    <li>AI voice platforms (Amazon Connect AI, Five9 AI, Salesforce Service Cloud AI) demonstrate 40-60% cost reduction versus outsourced human agents at equivalent CSAT scores. TTEC Digital (AI consulting, ~30-35% of revenue) is the adaptation hedge — real but insufficient to offset Engage's structural decline.</li>
+  </ul>
+  <div class="trigger">Key trigger: FY2026 Engage contract renewal win rate. If AI-enabled BPO alternatives win significant renewal contracts at TTEC's expense this year, revenue decline acceleration follows — Q3/Q4 2026 is the confirmatory inflection point.</div>
+</div>
+
+<!-- LPSN -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">LivePerson</span>
+    <span class="company-score score-high">68<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">LPSN · Conversational AI / Enterprise SaaS · Market Cap ~$200M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>90</span></div>
+    <div class="dim">D3 <span>80</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>ADS's most self-referential case: a company that sells conversational AI is disrupted by conversational AI. Salesforce, HubSpot, and Zendesk now bundle chatbot AI into existing subscriptions at zero marginal cost — eliminating LivePerson's incremental value proposition.</li>
+    <li>Q4 2025 revenue $59.3M (−19% YoY). FY2026 guidance $195–207M — continued contraction. NRR estimated below 90% (net contraction). The $43M SoundHound acquisition values LPSN at 98%+ below its ~$3-4B 2021 peak.</li>
+    <li>The Syntrix platform (AI agent evaluation/QA, March 2026) is a genuine pivot to a less commoditized market — but too late and too small to rescue the standalone entity. SoundHound absorbing LPSN is the ADS framework's clearest end-state forensic case.</li>
+  </ul>
+  <div class="trigger">Key trigger: First post-merger combined earnings call disclosures on LPSN revenue trajectory and churn rates. The $350-400M 2027 combined revenue target requires arresting LPSN's accelerating decline — the integration execution risk is substantial.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- ZI -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">ZoomInfo</span>
+    <span class="company-score score-med">64<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">ZI · B2B Data / GTM Intelligence Software · Market Cap ~$3.5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Stock −92% from 2021 peak (~$65 → ~$7) — steepest decline of any ADS-evaluated company. 2026 revenue guidance ~$1.25B (+1% YoY) vs. prior 30-40% growth. NRR declined from 110%+ to ~95-97% — net subscription contraction.</li>
+    <li>Clay.com AI synthesis generates richer B2B profiles from public sources in real-time at 80-90% lower cost. Apollo.io offers comparable contact data at $49-149/month vs. ZoomInfo's $100K+/year enterprise contracts — a 10-50x price gap that AI-native alternatives now credibly bridge.</li>
+    <li>GTM Studio and GTM Workspace (AI-powered sales intelligence) launched — strategic pivot from data vendor to AI GTM platform. Q4 2025 earnings beat caused brief stock recovery. Revenue trajectory (+1%) indicates execution gap remains between vision and demonstrated revenue impact.</li>
+  </ul>
+  <div class="trigger">Key trigger: NRR inflection in H1 2026. Recovery above 100% validates the AI GTM pivot; further decline below 90% creates LivePerson-style self-reinforcing contraction. This is the binary inflection point for ZI's trajectory.</div>
+</div>
+
+<!-- SNAP -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Snap</span>
+    <span class="company-score score-med">60<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">SNAP · Social Media / AR Platform · Market Cap ~$20B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>April 2026: 16% workforce reduction (1,000 employees). CEO Spiegel's memo: "AI generates more than 65% of all new code at Snap." One of the most direct quantitative CEO disclosures of AI-driven headcount reduction in consumer tech. $500M+ annualized savings — but the efficiency gain doesn't solve the core problem.</li>
+    <li>Ad budget share loss to Meta Advantage+ and TikTok AI targeting. Annual revenue per MAU: $3.56 (Snap) vs. $14.81 (Meta). As AI narrows targeting performance gaps between platforms, Snap's differentiation depends on its AR ecosystem — a narrower moat than 2021.</li>
+    <li>AR platform (Lens Studio, Snap Spectacles, AR Enterprise) is Snap's genuine long-term differentiator — harder for Meta to replicate than AI-optimized ad targeting. Stock −30%+ YTD 2026 prices this structural ambiguity as net negative.</li>
+  </ul>
+  <div class="trigger">Key trigger: H1 2026 advertising revenue growth rate. 10%+ YoY indicates the ad model holds; flat or negative growth confirms structural ad share loss to AI-optimized platforms — and forces the AR monetization thesis to carry the company alone.</div>
+</div>
+
+<!-- BBAI -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">BigBear.ai</span>
+    <span class="company-score score-med">54<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">BBAI · Defense AI Analytics · Market Cap ~$700M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>40</span></div>
+    <div class="dim">D5 <span>70</span></div>
+  </div>
+  <ul>
+    <li>FY2025 revenue −37.7% YoY from U.S. Army contract disruptions — structural dependence on a small number of large contracts. Recapitalization (90%+ debt reduction, $462M liquidity) demonstrates board willingness to execute structural reset rather than passive decline.</li>
+    <li>Unlike ADS HIGH-risk companies where AI displacement is the primary threat, BBAI is a structural defense AI beneficiary — but faces competition from Palantir, Booz Allen, SAIC, and Leidos with significantly larger balance sheets and contract vehicles.</li>
+    <li>Platform pivot: Ask Sage (cleared government AI knowledge management) and CargoSeer (TRANSCOM logistics AI) add sticky, domain-specific recurring revenue to the historically project-based contracting model. Security clearance requirements create genuine barriers for commercial competitors.</li>
+  </ul>
+  <div class="trigger">Key trigger: Platform revenue contribution in H2 2026. If Ask Sage and CargoSeer together represent >10% of total revenue by year-end, the platform pivot is on track — and the ADS score warrants downward revision toward LOW territory.</div>
+</div>
+
+<!-- ADBE -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Adobe</span>
+    <span class="company-score score-med">50<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">ADBE · Creative Software / Digital Media · Market Cap ~$180B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>CEO Shantanu Narayen stepped down March 2026 amid reported "AI rivalry fears" — the board's implicit judgment that Firefly monetization has not resolved the structural pricing pressure from Midjourney and Canva. Stock −23% YTD 2026 vs. S&amp;P 500 −3%.</li>
+    <li>5x price gap: Canva AI at $12/month vs. Adobe Creative Cloud at $60+/month. Midjourney replaces Adobe Stock licensing for millions of users at 90% cost reduction. The mid-market creative workflow is at-risk; professional design (Photoshop, Premiere) remains entrenched.</li>
+    <li>Positive signals: Firefly Subscription ARR +75% sequentially in Q1 FY2026. Creative Cloud ARR ~$14B with genuine subscription stickiness. PDF/Acrobat/Sign enterprise business (~$4B+ estimated ARR) is structurally unchallenged by current AI tools.</li>
+  </ul>
+  <div class="trigger">Key trigger: New CEO execution on Firefly monetization — can AI features justify Creative Cloud's premium pricing versus Canva AI by end-2026? Q3/Q4 FY2026 NRR trajectory and Firefly ARR absolute contribution are the indicators.</div>
+</div>
+
+<!-- SOUN -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">SoundHound AI</span>
+    <span class="company-score score-med">42<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">SOUN · Voice AI Platform · Market Cap ~$2.5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>40</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>80</span></div>
+  </div>
+  <ul>
+    <li>SoundHound is ADS's AI disruptor case — it provides the voice AI layer rather than being disintermediated by AI. Automotive OEM contracts (BMW, Stellantis, Honda multi-year) create hardware-level lock-in with 3-7 year vehicle replacement cycles.</li>
+    <li>LivePerson acquisition (April 21, 2026): all-stock at $43M equity value — acquires 1B monthly messages + 12 of 15 top global banks as customers without meaningful cash outlay. Creative capital stewardship: acquiring distressed assets at near-zero cost to build omnichannel conversational AI platform.</li>
+    <li>Primary competitive risk: Apple CarPlay AI and Google Android Auto voice layers could eliminate need for third-party embedded voice AI in future automotive platforms — a 3-5 year horizon that most OEMs are actively resisting by retaining data and customer relationship ownership.</li>
+  </ul>
+  <div class="trigger">Key trigger: LivePerson integration revenue stabilization — LPSN's −19% YoY decline must be arrested to achieve projected $350-400M 2027 combined revenue. First post-merger earnings call churn disclosures are the definitive integration test.</div>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- ALAB -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Astera Labs</span>
+    <span class="company-score score-low">30<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">ALAB · AI Connectivity Semiconductors · Market Cap ~$8B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>30</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>Every NVIDIA GB200 NVL72 rack requires Astera Labs PCIe connectivity chips and CXL memory expanders — the company's silicon is baked into the hardware design, generating revenue across 3-5 year hardware refresh cycles with minimal competitive re-evaluation.</li>
+    <li>The AI infrastructure capex supercycle ($600-700B combined hyperscaler capex in 2026) is the most powerful tailwind any ADS-evaluated company has encountered. Revenue/employee of ~$800K+ is among the highest in the semiconductor industry.</li>
+    <li>CXL memory expansion (Leo product line) addresses the AI memory bandwidth bottleneck that limits AI training at scale — positioning Astera for the architectural wave beyond current GPU HBM bandwidth constraints. Scorpio Ethernet ASIC family extends Astera into AI networking.</li>
+  </ul>
+  <div class="trigger">Key trigger: CXL 3.0 adoption timeline in hyperscaler server designs. Hyperscaler RFP wins for CXL-based memory architectures in 2026-2027 would represent a major revenue inflection beyond the PCIe anchor business.</div>
+</div>
+
+<!-- CEG -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Constellation Energy</span>
+    <span class="company-score score-low">28<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">CEG · Nuclear Power Generation · Market Cap ~$60B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>10</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>America's largest nuclear operator (21 reactors, ~21 GW) with a Microsoft 20-year PPA for Three Mile Island's restarted Crane Clean Energy Center. CEO Dominguez: "We are rationing capacity" — hyperscalers are competing for nuclear power because it is the only proven 24/7 carbon-free baseload at grid scale.</li>
+    <li>The IEA projects global data center electricity consumption nearly doubling: 415 TWh (2024) → 945 TWh by 2030. Solar and wind require 4-8x storage investment for equivalent reliability. AI is increasing Constellation's pricing power, not eroding it.</li>
+    <li>Physical nuclear power generation cannot be disintermediated by software or AI — electrons must be physically generated and transmitted. The physical moat (NRC licensing, 30+ years of operational expertise, grid interconnection rights) is non-replicable on any reasonable timeline.</li>
+  </ul>
+  <div class="trigger">Key trigger: Hyperscaler PPA signings beyond Microsoft. Google, Amazon, or Meta signing 20-year nuclear PPAs with Constellation by end-2026 would validate the AI data center nuclear thesis at full commercial scale.</div>
+</div>
+
+<!-- TSM -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Taiwan Semiconductor</span>
+    <span class="company-score score-low">26<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">TSM · Semiconductor Foundry · Market Cap ~$900B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>Q1 2026: profits +58%, fourth consecutive record quarter. Every AI chip — NVIDIA H100/H200/B200, AMD MI300, Apple M-series, Google TPU, Amazon Trainium — fabricated exclusively at TSMC's leading-edge nodes (2nm/3nm). AI is TSMC's most powerful demand catalyst in its history.</li>
+    <li>N3 wafer price raised to ~$20,000+ (vs. ~$12,000 for N7) — customers accepted because Samsung has lower yields at comparable nodes and Intel Foundry is not yet competitive. Supply is the constraint, not demand. Pricing power is growing, not eroding.</li>
+    <li>Physical semiconductor fabrication cannot be bypassed by software or AI. TSMC is not subject to AI disintermediation risk; it is the physical foundation upon which global AI infrastructure is built. Arizona and Japan fab expansions address the primary geopolitical risk.</li>
+  </ul>
+  <div class="trigger">Key trigger: 2nm (N2) high-volume manufacturing ramp in H2 2026. N2 represents the next major pricing step-up — any yield disappointment is the only scenario in which competitive window opens for Samsung to gain advanced-node share.</div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section-label">📊 Issue #6 Comparison Table</div>
+<table class="comparison">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+      <th>Price*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-ticker">TTEC</td><td>TTEC Holdings</td><td class="td-score score-high">68</td><td><span class="badge badge-high">HIGH</span></td><td class="td-dim">90</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">30</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">LPSN</td><td>LivePerson</td><td class="td-score score-high">68</td><td><span class="badge badge-high">HIGH</span></td><td class="td-dim">50</td><td class="td-dim">90</td><td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">50</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">ZI</td><td>ZoomInfo</td><td class="td-score score-med">64</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">50</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">SNAP</td><td>Snap</td><td class="td-score score-med">60</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">BBAI</td><td>BigBear.ai</td><td class="td-score score-med">54</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">40</td><td class="td-dim">70</td><td class="td-dim">50</td><td class="td-dim">40</td><td class="td-dim">70</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">ADBE</td><td>Adobe</td><td class="td-score score-med">50</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">50</td><td class="td-dim">40</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">SOUN</td><td>SoundHound AI</td><td class="td-score score-med">42</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">20</td><td class="td-dim">50</td><td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">80</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">ALAB</td><td>Astera Labs</td><td class="td-score score-low">30</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">60</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">CEG</td><td>Constellation Energy</td><td class="td-score score-low">28</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">10</td><td class="td-dim">60</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">TSM</td><td>Taiwan Semiconductor</td><td class="td-score score-low">26</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-price">—</td></tr>
+  </tbody>
+</table>
+<p style="font-size:11px;color:#aaa;margin-top:8px;">*Price data unavailable for this issue. Backtest tracking begins from next available price fetch.</p>
+
+<div class="cta">
+  <div class="label">Free on Substack</div>
+  <div class="headline">Subscribe for weekly ADS scores</div>
+  <p>Deep-dives, methodology updates, and the cumulative ADS tracker with 60 companies scored.</p>
+  <a href="https://danbikim.substack.com" target="_blank">Subscribe Free →</a>
+</div>
+
+<div class="footer">
+  <p><strong>IMPORTANT DISCLOSURES:</strong> ADS scores are for informational purposes only and do not constitute investment advice. No buy, sell, or hold recommendations are made. Scores reflect AI displacement risk assessment methodology v1.0 as of April 2026.</p>
+  <br>
+  <p><a href="/ads/weekly/">← All Issues</a> · <a href="/">danbikim.github.io</a> · <a href="https://danbikim.substack.com">Substack</a></p>
+  <br>
+  <p>AI Displacement Score by Danbi Kim · danbikim.github.io/ads · April 2026</p>
+</div>
+
+</body>
+</html>
