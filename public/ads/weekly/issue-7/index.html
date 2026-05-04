@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #7 | April 29, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef3e6; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+  .dim span { font-weight: 700; color: #333; }
+
+  .company-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .company-card ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .company-card li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 4px;
+  }
+
+  .trigger {
+    background: #f8f8f8;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .comparison td {
+    padding: 8px 8px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+  .td-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">ADS Weekly · Issue #7</div>
+  <h1>The AI Efficiency Dividend</h1>
+  <p class="subtitle">April 29, 2026 · 10 companies scored · Restructuring, repositioning, and the new beneficiaries — who captures the efficiency dividend?</p>
+</div>
+
+<div class="intro">
+  This week spans the full displacement range: <strong>Kforce (72)</strong> leads the HIGH tier — IT staffing faces simultaneous AI attack on both the labor it places and the recruiters who place it. <strong>AMD (22) and Cloudflare (26)</strong> score near the ADS floor — semiconductor and network infrastructure that AI runs on, not through. The week's central insight: AI is restructuring workforces and compressing intermediaries, while the physical and network layers compound. <strong>NICE (38)</strong> is the counterintuitive case — a contact center software company capturing the AI spending that is eliminating the BPO industry.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- KFRC -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Kforce</span>
+    <span class="company-score score-high">72<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">KFRC · IT Staffing / Professional Services · Market Cap ~$600M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>AI is attacking IT staffing from both sides: GitHub Copilot and Cursor AI reduce contractor billable hours by 20-35% per project; Eightfold.ai performs candidate matching at $0.50/match vs. $800+ in recruiter labor. Enterprise clients are inserting "AI productivity pass-through" clauses that compress revenue per placement even as volumes stabilize.</li>
+    <li>FY2025 revenue −5.4% YoY. Q2 2026 guidance +4% is a cyclical bounce (IT spending normalization), not structural reversal. Staffing Industry Analysts projects tech staffing +1% vs. a total IT market growing at 20%+ — the gap is the AI productivity wedge widening each quarter.</li>
+    <li>No proprietary AI recruitment platform. KforceGPT tools improve internal efficiency but don't reposition the fundamental value proposition: Deel AI and Remote.com offer Employer of Record compliance without the staffing agency intermediary at all.</li>
+  </ul>
+  <div class="trigger">Key trigger: Q3 2026 IT contractor bill rates and markup margins. If "AI productivity pass-through" clauses become standard, revenue per placement declines structurally even with volume recovery. The Q2 2026 guidance improvement is cyclical, not structural.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- EXLS -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">ExlService Holdings</span>
+    <span class="company-score score-med">56<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">EXLS · BPO / Analytics Services · Market Cap ~$5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>~55,000 employees, 65-70% offshore in India and Philippines. Insurance claims processing (O*NET 70-80% AI exposure) and healthcare revenue cycle management (Optum Clinical AI automating 50-70% of tasks) are EXL's core delivery — and highest AI automation risk.</li>
+    <li>Near-term strong (+13.8% Q1 2026), but BPO contract renewals showing 20-30% volume reduction requests from insurance and healthcare clients deploying Guidewire Claim Center AI and Optum internally. 57% revenue now "data and AI-led" engagements with shorter contract durations than traditional multi-year BPO.</li>
+    <li>EXLService.ai platform and analytics pivot are strategic direction. But delivery model remains "humans + AI" rather than "AI-native" — until margin profiles reflect AI-native economics, BPO pricing compression and contract volume reduction will continue offsetting analytics growth.</li>
+  </ul>
+  <div class="trigger">Key trigger: FY2026 BPO contract renewal volumes. 20-30% reduction requests from large insurance and healthcare clients will become visible in Q3/Q4 2026 revenue mix. Analytics growth must accelerate to offset BPO volume compression — the crossover is the structural inflection point.</div>
+</div>
+
+<!-- CDAY -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Dayforce</span>
+    <span class="company-score score-med">54<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">CDAY · Human Capital Management / HCM SaaS · Market Cap ~$7B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>The HCM pricing umbrella is compressing: Workday bundles AI Copilot at no incremental cost; Rippling enters at $6-8 PEPM vs. Dayforce's $8-15 PEPM. Market expectation is AI-in-HCM at no charge — directly challenging Dayforce's premium positioning.</li>
+    <li>Rippling's "Employee Graph" architecture is the structural threat: positioning as the API orchestration layer above individual HCM modules, disintermediating Dayforce's scheduling, time-tracking, and benefits workflows without requiring a full platform swap. Incremental scope erosion at renewal, not full churn.</li>
+    <li>Compliance integrations (50 US states + Canada payroll, 40+ benefits providers) create genuine switching costs that protect existing large accounts. Dayforce AI Workspace launched — but NRR impact not yet confirmed in financial data.</li>
+  </ul>
+  <div class="trigger">Key trigger: NRR trajectory in FY2026. If AI Workspace drives NRR above 105% sustained, the premium is defensible. If NRR declines below 100% as mid-market clients migrate to Rippling, structural revenue contraction thesis is confirmed.</div>
+</div>
+
+<!-- HUBS -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">HubSpot</span>
+    <span class="company-score score-med">46<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">HUBS · CRM / Marketing Automation SaaS · Market Cap ~$18B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>30</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Pricing compression from both directions: Salesforce Einstein bundled free in Sales Cloud, Microsoft Copilot in M365 enterprise agreements. SMB alternatives (Monday.com, Pipedrive, Zoho) at 50-70% lower price. The market expectation is AI-in-CRM at no charge — HubSpot's Breeze AI credit model faces structural headwinds.</li>
+    <li>Breeze AI platform: Prospecting Agent (10,000+ activations), Customer Agent (8,000+), Content Assistant. Claude/Anthropic MCP partnership is the right architectural bet for SMB/mid-market open ecosystem. But Salesforce Agentforce ($10B+ investment) and Microsoft Copilot (M365 distribution) are compounding the resource asymmetry.</li>
+    <li>FY2026 guidance $3.69-3.70B (+16% YoY), 288,000+ customers — strong execution. NRR expected +1-2 points from AI credits only (not seat expansion) — customers increasingly expect AI included, not priced separately as add-on credits.</li>
+  </ul>
+  <div class="trigger">Key trigger: NRR trajectory Q2-Q3 2026 and Breeze Agent adoption rates. If NRR growth accelerates above prior trajectory driven by Breeze upsell, HubSpot has successfully threaded the AI-era needle. Flat or declining NRR confirms the pricing compression thesis.</div>
+</div>
+
+<!-- NKE -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Nike</span>
+    <span class="company-score score-med">40<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">NKE · Athletic Footwear &amp; Apparel · Market Cap ~$70B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>30</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Two rounds of layoffs in 2026 — 775 (January) and 1,400 (April), totaling ~2,200 positions — both rounds explicitly citing AI automation of supply chain and technology functions. AI-driven workforce restructuring at one of the world's most recognized consumer brands, in real time.</li>
+    <li>Brand moat intact. Gross margins holding 44-45% despite China headwinds and tariff pressure. Jordan Brand ($180-250), Nike Air Max ($150-210), DTC average selling prices +3% YoY. AI-generated competing designs emerging from Adidas/New Balance — limited by Nike's IP portfolio (Air, Flyknit, Dri-FIT) and athlete partnership network.</li>
+    <li>Near-term revenue challenge is macro-driven (China −20% projected Q4 FY2026, tariff impacts), not AI-driven competitive loss. CEO Elliott Hill's product-first refocus since October 2024 is restoring design velocity. "Win Now" restructuring is primarily financial efficiency, not strategic pivot.</li>
+  </ul>
+  <div class="trigger">Key trigger: AI disruption at Nike is workforce restructuring through efficiency, not existential product substitution. The risk is that AI progressively eliminates the human-capital moat — design velocity, marketing differentiation — that historically justified Nike's premium multiple. Adidas AI-assisted design acceleration is the 2026-2027 watch item.</div>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- NICE -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">NICE Ltd</span>
+    <span class="company-score score-low">38<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">NICE · Contact Center Software / CCaaS · Market Cap ~$12B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>30</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>40</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>The counterintuitive ADS case: a contact center software company capturing the AI spending that is eliminating the BPO industry. AI ARR $328M growing 66% YoY — 4x the company's overall growth rate. 100% of new seven-figure CXone deals include AI. Enterprises replace TTEC and KFRC contract labor with NICE's AI software.</li>
+    <li>CXone Autopilot: 90%+ tier-1 self-service resolution rate. Tier-1 contacts (basic inquiries, status checks, simple transactions) are 40-60% of enterprise contact center volume — Autopilot handles these at CSAT parity with humans at dramatically lower cost.</li>
+    <li>$955M Cognigy acquisition (2025) adds state-of-the-art conversational and agentic AI. ~300 CRM/telephony/workforce integrations create switching friction. NICE positioned as AI orchestration layer above hyperscaler alternatives (AWS Connect AI, Google CCAI, Salesforce Service Cloud).</li>
+  </ul>
+  <div class="trigger">Key trigger: As AI reduces human agent headcount by 30-50% over 5 years, does contact center software spending increase or decrease? 66% AI ARR growth says increase. Cognigy integration execution and H2 2026 AI ARR trajectory confirm or deny durability.</div>
+</div>
+
+<!-- QCOM -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Qualcomm</span>
+    <span class="company-score score-low">38<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">QCOM · Semiconductors / Chip Design · Market Cap ~$160B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>AI displacement risk is not disintermediation — it's customer vertical integration. Apple's C2 modem (shipping 2026-2027) reduces Qualcomm iPhone content from ~$20-22 to ~$7-10/device. Q2 FY2026 guidance $10.2-11.0B missed Street ($11.12B). Smartphone chip shipments projected −7% in 2026.</li>
+    <li>Structural offsets are real: $45B automotive design-win pipeline (QCT Automotive $1.1B, +55% YoY). BMW, GM, Hyundai, Stellantis design wins with 3-7 year production ramps. QTL patent licensing contractually protected through 2030. Snapdragon 8 Elite monopoly in high-end Android.</li>
+    <li>Snapdragon NPU at 100+ TOPS is the industry-leading on-device AI benchmark — the silicon that runs AI assistants, image generation, and real-time translation on Android flagships. OpenAI chip partnership discussions represent a potential new premium tier beyond handsets.</li>
+  </ul>
+  <div class="trigger">Key trigger: Does automotive + PC AI + OpenAI compound faster than iPhone content reduction? FY2027 automotive revenue ramp is the confirmatory milestone — the $45B pipeline has 3-5 year production lead times from current design wins.</div>
+</div>
+
+<!-- AAPL -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Apple</span>
+    <span class="company-score score-low">28<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">AAPL · Consumer Technology / Hardware &amp; Services · Market Cap ~$3.1T</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Q1 FY2026 revenue $143.8B — a quarterly record. Apple Intelligence driving the largest iPhone upgrade cycle in 3 years. Services revenue ~$100B annualized run rate (+14-16% YoY) at ~73% gross margins. AI is a revenue catalyst for Apple, not a threat.</li>
+    <li>App Store bypass risk (AI agents routing purchases outside commission structure) and EU DMA third-party app stores are the primary displacement risk vectors. Defense: iOS 88% retention, hardware security enclave, Apple Pay biometric integration, iMessage/FaceTime network effects — multi-layer switching cost architecture.</li>
+    <li>Apple Intelligence (iOS 18.1+): writing tools, image generation, enhanced Siri, ChatGPT integration. Siri quality gap vs. Gemini/Claude on complex reasoning tasks is the primary reputational AI risk. Q2 FY2026 earnings (April 30, 2026) will provide first Apple Intelligence monetization data.</li>
+  </ul>
+  <div class="trigger">Key trigger: Q2 FY2026 earnings (April 30, 2026) — first comprehensive Apple Intelligence monetization data: upgrade rates, Services ARPU lift, AI-driven ASP premium. The App Store AI agent bypass risk remains a 3-5 year structural watch item.</div>
+</div>
+
+<!-- NET -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Cloudflare</span>
+    <span class="company-score score-low">26<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">NET · Network Infrastructure / Security / Edge Computing · Market Cap ~$30B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>30</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>Internet infrastructure — every AI application connecting to the internet routes through Cloudflare's network. Workers AI and AI Gateway create a new intermediation layer between AI applications and LLM providers (OpenAI, Anthropic, Google), capturing value in both directions. AI deepens Cloudflare's position, not threatens it.</li>
+    <li>Q4 2025 revenue $614.5M (+34% YoY). FY2026 guidance $2.785-2.795B (+28-29%). NRR consistently 115-120%. Enterprise customers (>$100K/year) +23% YoY; revenue +42% YoY. Workers AI: 332,000+ paying customers by Q4 2025. AI Gateway, Vectorize, AI Firewall all growing >100% YoY.</li>
+    <li>CEO Matthew Prince's "network for the AI era" positioning is validated by results. Primary risk is valuation (~30x FY2025 revenue) — multiple compression risk from macro slowdown. No AI displacement risk to the network business itself.</li>
+  </ul>
+  <div class="trigger">Key trigger: Workers AI and AI Gateway monetization trajectory in FY2026. The platform is growing >100% YoY from a base — absolute revenue contribution vs. core network business is the maturity question. Hyperscaler proprietary edge capacity build-out is the long-term structural watch item.</div>
+</div>
+
+<!-- AMD -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Advanced Micro Devices</span>
+    <span class="company-score score-low">22<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">AMD · Semiconductors / Data Center &amp; Edge AI · Market Cap ~$250B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>ADS structural beneficiary designation. Q1 2026 guidance ~$9.8B (+32% YoY). Data center GPU revenue forecast $15B FY2026 (+114% YoY). OpenAI 6GW + Meta 6GW MI450 deployment agreements for H2 2026. EPYC CPU cloud market share grew from ~15% to ~25% (FY2023-FY2025). AMD is a direct financial beneficiary of AI infrastructure investment at the largest scale.</li>
+    <li>Zero AI bypass risk by definition. AMD manufactures semiconductor chips — every AI workload requires AMD or NVIDIA compute. Custom ASIC competition (Google TPU, Amazon Trainium, Meta MTIA) is a 3-5 year market share risk at specific hyperscalers, not AI disintermediation.</li>
+    <li>ROCm now supports 1,000+ AI models, approaching CUDA performance parity for inference. R&amp;D $6B+ (FY2025) concentrated on AI chip architecture. MI300X → MI400 → MI450 annual roadmap cadence. AMD's ADS of 22 places it in the lowest 10% of displacement risk — second only to Microsoft in the beneficiary tier.</li>
+  </ul>
+  <div class="trigger">Key trigger: ROCm training parity with CUDA. ROCm achieves inference parity for 1,000+ models — if training parity for frontier models (GPT-4 class, 10,000+ GPU clusters) follows in FY2026, AMD's TAM at hyperscalers expands significantly. MI450 OpenAI/Meta deployment ramp in H2 2026 is the near-term financial catalyst.</div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section-label">📊 Issue #7 Comparison Table</div>
+<table class="comparison">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+      <th>Price*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-ticker">KFRC</td><td>Kforce</td><td class="td-score score-high">72</td><td><span class="badge badge-high">HIGH</span></td><td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">60</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">EXLS</td><td>ExlService Holdings</td><td class="td-score score-med">56</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">70</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">40</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">CDAY</td><td>Dayforce</td><td class="td-score score-med">54</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">HUBS</td><td>HubSpot</td><td class="td-score score-med">46</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">50</td><td class="td-dim">30</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">40</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">NKE</td><td>Nike</td><td class="td-score score-med">40</td><td><span class="badge badge-med">MEDIUM</span></td><td class="td-dim">50</td><td class="td-dim">40</td><td class="td-dim">30</td><td class="td-dim">30</td><td class="td-dim">50</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">NICE</td><td>NICE Ltd</td><td class="td-score score-low">38</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">50</td><td class="td-dim">30</td><td class="td-dim">50</td><td class="td-dim">40</td><td class="td-dim">20</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">QCOM</td><td>Qualcomm</td><td class="td-score score-low">38</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">40</td><td class="td-dim">40</td><td class="td-dim">50</td><td class="td-dim">30</td><td class="td-dim">30</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">AAPL</td><td>Apple</td><td class="td-score score-low">28</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">40</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">NET</td><td>Cloudflare</td><td class="td-score score-low">26</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-price">—</td></tr>
+    <tr><td class="td-ticker">AMD</td><td>Advanced Micro Devices</td><td class="td-score score-low">22</td><td><span class="badge badge-low">LOW</span></td><td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-price">—</td></tr>
+  </tbody>
+</table>
+<p style="font-size:11px;color:#aaa;margin-top:8px;">*Price data tracked in cumulative backtest. Cumulative tracker (70 companies) available in Issue #7 PDF.</p>
+
+<div class="cta">
+  <div class="label">Free on Substack</div>
+  <div class="headline">Subscribe for weekly ADS scores</div>
+  <p>Deep-dives, methodology updates, and the cumulative ADS tracker with 70 companies scored.</p>
+  <a href="https://danbikim.substack.com" target="_blank">Subscribe Free →</a>
+</div>
+
+<div class="footer">
+  <p><strong>IMPORTANT DISCLOSURES:</strong> ADS scores are for informational purposes only and do not constitute investment advice. No buy, sell, or hold recommendations are made. Scores reflect AI displacement risk assessment methodology v1.0 as of April 2026.</p>
+  <br>
+  <p><a href="/ads/weekly/">← All Issues</a> · <a href="/">danbikim.github.io</a> · <a href="https://danbikim.substack.com">Substack</a></p>
+  <br>
+  <p>AI Displacement Score by Danbi Kim · danbikim.github.io/ads · April 2026</p>
+</div>
+
+</body>
+</html>
