@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #8 | May 6, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef3e6; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+  .dim span { font-weight: 700; color: #333; }
+
+  .company-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .company-card ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .company-card li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 4px;
+  }
+
+  .trigger {
+    background: #f8f8f8;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .comparison td {
+    padding: 8px 8px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">ADS Weekly · Issue #8</div>
+  <h1>The AI Restructuring Wave</h1>
+  <p class="subtitle">May 6, 2026 · 10 companies scored · Three CEOs disclosed AI displacement in one week — Freshworks, Coinbase, and DXC confirm what TaskUs already knew</p>
+</div>
+
+<div class="intro">
+  Issue #8 arrives in the middle of the most concentrated week of AI displacement disclosures in 2026. On May 5 alone: <strong>Freshworks cut 11%</strong> of its workforce (CEO: "over half our code is written by AI"), <strong>Coinbase cut 14%</strong> ("engineers ship in days what used to take teams weeks"), and <strong>DXC Technology hit a historic stock low</strong> while announcing AI deployed for all 115,000 employees. We scored the full displacement spectrum this week — from <strong>TaskUs (74, HIGH)</strong>, the most directly exposed BPO company in our universe, to <strong>ASML (26, LOW)</strong>, the EUV monopoly that is a structural AI beneficiary. <strong>CrowdStrike (36)</strong> scores LOW because the same AI cycle driving BPO displacement is expanding its addressable threat landscape.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- TASK -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">TaskUs</span>
+    <span class="company-score score-high">74<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">TASK · BPO / Digital Customer Experience · Market Cap ~$800M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>90</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>80</span></div>
+    <div class="dim">D4 <span>90</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>~45,000 employees in the Philippines and India doing customer experience, content moderation, and trust &amp; safety — the three highest AI-automatable service lines. AI CS platforms resolve 70-80% of inquiries at $0.10-$0.30/resolution versus TaskUs's $2-$5/human-agent. GPT-4V and Gemini achieve &gt;90% accuracy on content moderation. Klarna cut CS headcount 50%+ with AI; Block cut 4,000 CS jobs — both are operational playbooks TaskUs's hyperscaler clients are now executing.</li>
+    <li>Gross margin compressed from ~36% (FY2022) to ~31% (FY2024) as clients use AI productivity benchmarks to demand 20-30% rate reductions at BPO renewals. Top-5 client concentration &gt;40% — hyperscaler clients (Meta, Google, Microsoft, TikTok) are simultaneously TaskUs's largest revenue sources and most aggressive AI-native CS investors.</li>
+    <li>AI Operations pivot (&lt;20% of revenue: RLHF, red-teaming) is directionally correct but self-limiting — RLHF volume declines as models mature. Retraining 45,000 CX agents for AI oversight roles is economically impractical: the AI oversight workforce required is 1/10th the displaced CX workforce.</li>
+  </ul>
+  <div class="trigger">Key trigger: AI resolution rates exceeding 80% at top-5 hyperscaler clients is the binary event. The FY2026 contract renewal cycle will reveal volume reduction magnitude. Contract durations are already compressing from 3-5 years to 18-36 months.</div>
+</div>
+
+<!-- DXC -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">DXC Technology</span>
+    <span class="company-score score-high">70<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">DXC · IT Managed Services · Market Cap ~$2.1B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>90</span></div>
+    <div class="dim">D2 <span>60</span></div>
+    <div class="dim">D3 <span>80</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Revenue declined 35% over five years — ~$20B (FY2021) to ~$13B (FY2026) — as enterprises shift IT operations to cloud-native management platforms. AWS Systems Manager, ServiceNow AIOps, Dynatrace automate 60-70% of IT service desk tickets DXC handles manually. Book-to-bill below 1.0 multiple consecutive quarters. Stock hit $11.32 historic low on April 30, 2026.</li>
+    <li>DXC launched OASIS AI platform April 28, 2026 — agentic AI for infrastructure monitoring and incident resolution. Correct direction; 3-5 years behind Accenture SynOps (2021) and Infosys Topaz (2023). Simultaneously, management confirmed AI deployed "at scale for all 115,000 employees" — validating that its own delivery workforce is automatable.</li>
+    <li>Three CEO transitions in five years confirm a structural challenge, not managerial. No successful incumbent MSP-to-AI-platform pivot at scale has been demonstrated. OASIS must generate &gt;$500M in attributable ARR by FY2027 for the transformation thesis to be credible.</li>
+  </ul>
+  <div class="trigger">Key trigger: OASIS adoption metrics and FY2026 book-to-bill ratio. If revenue continues declining at -7% to -10% annually while OASIS remains subscale, the structural harvest mode thesis is confirmed.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- FRSH -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Freshworks</span>
+    <span class="company-score score-med">64<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">FRSH · B2B SaaS / CRM &amp; ITSM · Market Cap ~$4.5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>60</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>CEO Dennis Woodside on May 5, 2026: "Over half of our code is written by AI." Accompanied by 11% workforce cut (500 jobs), explicitly AI-attributed. First major SaaS CEO to quantify internal AI displacement at this scale. The recursive quality: Freshworks sells AI-powered CS tools (Freddy AI) while discovering that AI productivity gains apply equally to its own engineering workforce.</li>
+    <li>ARR ~$720M growing 20% YoY, 84% gross margins — near-term financial resilience. NRR declining ~115% (2022) → ~107% (2025): early churn signal in the SMB segment (~70% of customers). Intercom Fin AI and Zendesk AI Suite offering comparable CS automation at $0.10-$0.30/resolution versus Freshdesk's per-agent pricing.</li>
+    <li>Freshworks is cutting R&amp;D headcount while competing in a market where AI feature depth determines positioning. Zendesk and Intercom lead on 2026 AI benchmarks. Workforce reduction improves FCF but reduces capacity to close the competitive gap with better-resourced AI-native alternatives.</li>
+  </ul>
+  <div class="trigger">Key trigger: NRR declining below 100% confirms SMB losses exceed enterprise expansion — the inflection from growth deceleration to ARR contraction. The CEO's AI adoption disclosure is a 12-24 month leading indicator for what clients will do with Freshdesk at the product level.</div>
+</div>
+
+<!-- PYPL -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">PayPal</span>
+    <span class="company-score score-med">62<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">PYPL · Digital Payments · Market Cap ~$70B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>AI shopping agents (OpenAI "buy for me", Google Shopping AI, Perplexity Buyer) complete purchases autonomously — the consumer never selects a payment method. In the AI-agent era, payment routing is determined by compliance infrastructure and cost optimization, not brand preference. PayPal's branded checkout moment is structurally bypassed.</li>
+    <li>Take rate declining structurally: ~2.0% (2021) → ~1.8% (2023), compressing further as AI agents route to optimal rails (ACH, crypto, BNPL). $1.5B AI savings (2026) and Agent Ready initiative — positioning PayPal as payment infrastructure for AI agents rather than branded checkout — are the correct strategic responses.</li>
+    <li>430M active accounts and fraud/compliance infrastructure are genuine moats: AI agents need compliant payment rails, and PayPal's regulatory standing creates switching costs. Stripe's AI payment infrastructure strategy is the most direct competitive threat to the Agent Ready positioning.</li>
+  </ul>
+  <div class="trigger">Key trigger: Agent Ready adoption metrics in 2026-2027. If AI shopping agents prefer PayPal as a payment rail, bypass risk is mitigated. Take rate trajectory in Q3-Q4 2026 confirms the structural direction.</div>
+</div>
+
+<!-- COIN -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Coinbase</span>
+    <span class="company-score score-med">60<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">COIN · Crypto Exchange / Financial Technology · Market Cap ~$50B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>60</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>14% workforce cut (700 employees), May 5, 2026 — explicitly AI-driven. CEO Brian Armstrong: "I've watched engineers use AI to ship in days what used to take a team weeks." Implementing "AI-native pods" — some teams staffed by a single person deploying AI across engineering, compliance, design, and support. Most structurally innovative AI organizational response in financial services.</li>
+    <li>Transaction fees (~50% of revenue) are highly cyclical and structurally compressed by DEX competition (Uniswap/dYdX: 0.01-0.05% vs. Coinbase retail: 0.5-1.0%). AI trading agents route to lowest-cost venues. Subscription and services (~30%: staking, custody, Base L2) more durable — institutional custody clients have compliance requirements that make DEXs impractical.</li>
+    <li>The regulatory compliance moat (KYC/AML, FDIC-insured USD) creates switching costs for compliance-sensitive users. Base L2 growing transaction volume provides infrastructure revenue diversification. Armstrong AI vision credible since 2023 — not reactive restructuring but strategic commitment.</li>
+  </ul>
+  <div class="trigger">Key trigger: AI-native pods operating model validation — service quality metrics with 14% fewer employees. Base L2 transaction volume and institutional custody expansion are the revenue durability signals.</div>
+</div>
+
+<!-- SAP -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">SAP</span>
+    <span class="company-score score-med">56<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">SAP · Enterprise Software / ERP · Market Cap ~$270B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>60</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>~90% Fortune 500 penetration, $50M-$500M+ switching costs, 50+ years of business process logic — the deepest switching cost moat in enterprise software. Cloud ARR €14B+ growing +27% YoY. The threat is not replacement: it's the "AI wrapper" — Microsoft Copilot, Salesforce Agentforce capturing the enterprise interaction layer above SAP data, degrading SAP from application to data backend.</li>
+    <li>8,000 role changes announced 2024 as SAP Joule automates implementation tasks previously requiring consultant hours. Accenture and Deloitte SAP practices report 30-40% fewer billable hours per SAP deployment. SAP Business AI integrated across 80+ products. But Joule benchmarks below Salesforce Agentforce and Microsoft Copilot in independent 2026 reviews.</li>
+    <li>The "AI suite wars" (Oracle, Salesforce, SAP, Workday) is creating pricing pressure in new-logo scenarios. SAP's data advantage — decades of transaction history, global compliance workflows — is real and difficult to replicate. The AI wrapper risk is the most consequential long-horizon monitoring variable.</li>
+  </ul>
+  <div class="trigger">Key trigger: Microsoft Copilot for SAP adoption rate. If Copilot captures the enterprise interaction layer for SAP data, the wrapper scenario is materializing. Joule activation rates and AI-attributed ARR growth in FY2026 are SAP's countermeasure metrics.</div>
+</div>
+
+<!-- OKTA -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Okta</span>
+    <span class="company-score score-med">46<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">OKTA · Identity Security / IAM · Market Cap ~$13B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>NRR declined ~125% (2022) → ~111% (2025): the financial fingerprint of Microsoft Entra bundling. Entra provides SSO, MFA, directory services bundled with M365 E3/E5 at no incremental cost — a zero-cost alternative for 70%+ of large enterprises. Okta must price against zero-incremental-cost for the largest share of its addressable market.</li>
+    <li>Non-human identity (NHI) is the counter-narrative: every AI agent deployment requires authentication, access governance, and lifecycle management. Okta's vendor-neutral position versus Microsoft's integrated stack is a competitive advantage for enterprises seeking independent identity control over AI agent access. 7,000+ Integration Network app integrations create an authentication surface AI workflows must traverse.</li>
+    <li>Okta AI (threat signals, AI lifecycle management, identity risk scoring), FY2026 R&amp;D $800M+. Execution risk: Microsoft Entra Workload Identities is competing for AI agent authentication with superior enterprise distribution. Non-human identity ARR trajectory determines the 3-5 year financial outcome.</li>
+  </ul>
+  <div class="trigger">Key trigger: Non-human identity ARR &gt;$200M in FY2026-2027 validates the AI-era TAM expansion. NRR stabilization above 112% confirms Okta AI and IGA/PAM are offsetting Entra bundling pressure.</div>
+</div>
+
+<!-- MU -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Micron Technology</span>
+    <span class="company-score score-med">44<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">MU · Memory Semiconductors · Market Cap ~$120B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>80</span></div>
+  </div>
+  <ul>
+    <li>Issue #8's outlier case: AI is the primary demand driver, not a displacement threat. AI data centers consume 3-8x more DRAM per compute unit versus traditional servers. HBM3e (qualified at NVIDIA H200/B200) commands $2,000-$5,000/module — 5-10x standard DRAM. HBM supply sold out through 2026. Wall Street projects ~400% earnings growth over two years — the most significant memory upcycle in history, driven by AI infrastructure demand.</li>
+    <li>ADS MEDIUM (44) reflects structural memory market cyclicality, not AI displacement risk. Samsung's HBM capacity ramp in 2027-2028 is the most consequential medium-term risk: as HBM yields improve and Samsung adds capacity, current premium pricing will normalize. Standard DRAM/NAND remain commodity markets with limited structural pricing power.</li>
+    <li>$150B CHIPS Act fab expansion (New York, Idaho), HBM4 roadmap (2026-2027 qualification), LPDDR5X for edge AI inference, CXL memory for hyperscaler AI pooling. Investment-grade (Baa3/BBB-). Cyclical leverage is the primary risk variable; AI capex durability through 2027 is the demand monitoring variable.</li>
+  </ul>
+  <div class="trigger">Key trigger: Samsung HBM4 yield rates in H1 2027 — if &gt;70%, HBM pricing normalizes and premium compresses materially. AI capex durability ($600B+ through 2027) is the demand variable.</div>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- CRWD -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">CrowdStrike</span>
+    <span class="company-score score-low">36<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">CRWD · Cybersecurity / Endpoint &amp; Cloud Security · Market Cap ~$90B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>90</span></div>
+  </div>
+  <ul>
+    <li>Clearest AI beneficiary in the ADS universe. ARR $4B+ growing 28% YoY, NRR ~120%+. July 2024 global outage: &gt;95% customer retention post-incident — the most compelling evidence of switching cost depth in enterprise software. AI-powered threats (deepfake phishing, LLM-generated malware, agentic intrusions) are active in the 2026 threat landscape — each advance in offensive AI expands the security budget case for CrowdStrike-class protection.</li>
+    <li>Charlotte AI (generative AI security analyst, 2023): reduces threat investigation from hours to minutes. Threat Graph: 6 trillion events/week, 1.5PB ML training data — unmatched security AI data moat that no competitor can replicate on any near-term timeline. AI-native from inception (2011): ML threat detection pre-dates generative AI by a decade.</li>
+    <li>AI Security Posture Management (AI-SPM), LLM security scanning, Falcon for AI infrastructure protection — positioning CrowdStrike as the security layer for the AI deployment stack, not just protecting from AI attacks but securing AI applications themselves. $10B ARR target for FY2027.</li>
+  </ul>
+  <div class="trigger">Key trigger: AI threat landscape acceleration is the demand catalyst. Charlotte AI adoption metrics and AI-attributed detection efficiency are product differentiation signals. $10B ARR by FY2027 validates the platform thesis. Microsoft Defender E5 bundling share in SMB is the competitive risk indicator.</div>
+</div>
+
+<!-- ASML -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">ASML Holding</span>
+    <span class="company-score score-low">26<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">ASML · Semiconductor Equipment / EUV Lithography · Market Cap ~$305B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>10</span></div>
+    <div class="dim">D5 <span>60</span></div>
+  </div>
+  <ul>
+    <li>The quintessential AI shovel seller. Absolute monopoly on EUV lithography — 30+ years of R&amp;D with ZEISS, Cymer, Carl Zeiss SMT that no competitor has replicated. Nikon and Canon abandoned EUV development. High-NA EUV ($380M/system) has demand exceeding manufacturing capacity. Order backlog &gt;€36B extending to 2028+. ASML stock +33% YTD (2026).</li>
+    <li>Zero AI displacement risk: ASML manufactures the physical machines that manufacture physical chips. Every AI training cluster requires leading-edge chips manufactured on ASML EUV equipment. AI increases chip demand → increases EUV machine demand. No software, AI agent, or algorithmic alternative to physical photolithography for sub-10nm manufacturing exists on any near-term timeline.</li>
+    <li>High-NA EUV production ramp (2025-2026), Hyper-NA research (0.7+ NA for sub-1nm, targeting 2030s), AI computational lithography (deep learning for source mask optimization). TSMC roadmap to 1nm (2028) requires High-NA EUV that only ASML manufactures. Service revenue (30-40%) grows with every installed EUV system.</li>
+  </ul>
+  <div class="trigger">Key trigger: China export restriction expansion (DUV lithography) is the geopolitical risk — representing ~15-20% revenue loss if extended. High-NA EUV production rate (20+ systems annually by 2026) is the supply-side capacity constraint. Capex cycle durability through 2027 is the demand monitoring variable.</div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section-label">📊 Issue #8 Score Summary</div>
+
+<table class="comparison">
+  <tr>
+    <th>Ticker</th><th>Company</th><th>ADS</th><th>Risk</th>
+    <th style="text-align:center;">D1</th><th style="text-align:center;">D2</th>
+    <th style="text-align:center;">D3</th><th style="text-align:center;">D4</th>
+    <th style="text-align:center;">D5</th>
+  </tr>
+  <tr><td class="td-ticker">TASK</td><td>TaskUs</td><td class="td-score score-high">74</td><td>🔴 HIGH</td><td class="td-dim">90</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">90</td><td class="td-dim">40</td></tr>
+  <tr><td class="td-ticker">DXC</td><td>DXC Technology</td><td class="td-score score-high">70</td><td>🔴 HIGH</td><td class="td-dim">90</td><td class="td-dim">60</td><td class="td-dim">80</td><td class="td-dim">80</td><td class="td-dim">40</td></tr>
+  <tr><td class="td-ticker">FRSH</td><td>Freshworks</td><td class="td-score score-med">64</td><td>🟡 MED</td><td class="td-dim">80</td><td class="td-dim">60</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">50</td></tr>
+  <tr><td class="td-ticker">PYPL</td><td>PayPal</td><td class="td-score score-med">62</td><td>🟡 MED</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">50</td></tr>
+  <tr><td class="td-ticker">COIN</td><td>Coinbase</td><td class="td-score score-med">60</td><td>🟡 MED</td><td class="td-dim">70</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">60</td><td class="td-dim">60</td></tr>
+  <tr><td class="td-ticker">SAP</td><td>SAP</td><td class="td-score score-med">56</td><td>🟡 MED</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">60</td></tr>
+  <tr><td class="td-ticker">OKTA</td><td>Okta</td><td class="td-score score-med">46</td><td>🟡 MED</td><td class="td-dim">40</td><td class="td-dim">40</td><td class="td-dim">60</td><td class="td-dim">30</td><td class="td-dim">60</td></tr>
+  <tr><td class="td-ticker">MU</td><td>Micron Technology</td><td class="td-score score-med">44</td><td>🟡 MED</td><td class="td-dim">30</td><td class="td-dim">40</td><td class="td-dim">50</td><td class="td-dim">20</td><td class="td-dim">80</td></tr>
+  <tr><td class="td-ticker">CRWD</td><td>CrowdStrike</td><td class="td-score score-low">36</td><td>🟢 LOW</td><td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">90</td></tr>
+  <tr><td class="td-ticker">ASML</td><td>ASML Holding</td><td class="td-score score-low">26</td><td>🟢 LOW</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">10</td><td class="td-dim">60</td></tr>
+</table>
+
+<div class="cta">
+  <div class="label">Free Newsletter</div>
+  <div class="headline">Subscribe on Substack</div>
+  <p>10 companies scored every week. AI displacement risk, quantified.</p>
+  <a href="https://danbikim.github.io/ads">All Issues →</a>
+</div>
+
+<div class="footer">
+  ADS Framework v1.0 · <a href="https://danbikim.github.io/ads">danbikim.github.io/ads</a><br>
+  Produced by Danbi Kim · For informational purposes only · Not investment advice<br>
+  © 2026 · All past issues available at the link above
+</div>
+
+</body>
+</html>
