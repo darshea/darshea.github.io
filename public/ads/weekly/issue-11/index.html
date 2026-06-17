@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #11 | June 3, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .milestone-badge {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef5e7; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: #f5f5f5;
+    padding: 4px 9px;
+    border-radius: 2px;
+    color: #555;
+  }
+  .dim span { font-weight: 700; color: #1a1a1a; margin-left: 3px; }
+
+  ul { padding-left: 18px; margin-bottom: 12px; }
+  ul li {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .trigger {
+    background: #f9f9f9;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+    margin-top: 12px;
+  }
+  .trigger strong { color: #1a1a1a; font-style: normal; }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  table.comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    padding: 8px 6px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+  table.comparison td {
+    padding: 8px 6px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="milestone-badge">Issue #11 · 110 Companies Scored</div>
+  <div class="kicker">ADS Weekly · Issue #11</div>
+  <h1>The Great AI Divide</h1>
+  <p class="subtitle">June 3, 2026 · 10 companies scored · Legacy IT services face structural displacement while AI infrastructure suppliers accelerate — the same AI buildout creates opposite trajectories</p>
+</div>
+
+<div class="intro">
+  Issue #11 scores the sharpest structural divergence in the ADS framework to date. <strong>Kyndryl (70)</strong> and <strong>Xerox (70)</strong> are highest-risk companies in this issue — AI operations platforms are automating the managed IT and document workflows that define their businesses. On the opposite end, <strong>Marvell Technology (18)</strong> builds the custom silicon that powers every AI cluster, with Q2 FY27 guidance of +35% YoY confirming the AI infrastructure supercycle is accelerating, not slowing. The same AI buildout creates opposite outcomes depending on which side of the stack a company sits.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- KD -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Kyndryl</span>
+    <span class="company-score score-high">70<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">KD · IT Managed Services / Legacy Infrastructure · Market Cap ~$16B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Kyndryl holds the highest ADS in Issue #11 at 70, reflecting the structural exposure of a pure-play managed infrastructure services provider in an era where AI is automating the monitoring, management, and incident response workflows that define its business. Spun off from IBM in November 2021, Kyndryl inherited approximately 4,000 managed services contracts serving 75% of Fortune 100 companies — a portfolio that provides near-term revenue stability but embeds multi-year structural decline risk as AIOps platforms (ServiceNow ITOM, Dynatrace, PagerDuty) automate the billable labor hours per managed environment.</li>
+    <li>Kyndryl's 'Bridge' transformation strategy focuses on three objectives: divesting unprofitable legacy contracts, building Kyndryl Consult as a higher-value advisory business, and transitioning to AI-augmented managed services. Financial progress is visible — margins improving from deeply negative to near breakeven. The challenge is pace: converting a 83,000-person labor-intensive delivery model into AI-augmented delivery while managing client retention and renewal economics, against IBM Consulting, Infosys, and Wipro with larger AI R&amp;D budgets.</li>
+    <li>FY2026 revenue of approximately $14.7B represents decline from the $19B peak at spinoff — structural reduction driven by contract expirations and client insourcing. The mainframe services segment faces secular decline as enterprises migrate workloads to cloud-native architectures. An ADS of 70 reflects a company managing the most challenging transformation in IT services: converting a legacy labor model into an AI-era managed services provider against better-capitalized competitors with superior AI platforms.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Kyndryl's contract renewal economics in FY2027 are the defining monitoring signal. If revenue per contract increases at renewal, the Bridge transformation is working. If revenue per contract declines 10%+, clients are renegotiating AI efficiency savings rather than paying Kyndryl to capture them. Secondary: Kyndryl Consult revenue as percentage of total — if consulting exceeds 20% by FY2028, the higher-value pivot is materializing.</div>
+</div>
+
+<!-- XRX -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Xerox</span>
+    <span class="company-score score-high">70<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">XRX · Document Technology / Managed IT Services · Market Cap ~$2B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>80</span></div>
+    <div class="dim">D3 <span>80</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Xerox's ADS of 70 — tied for the highest in Issue #11 — reflects the compound structural decline of a company whose primary business (physical document printing and managed print services) is being eliminated by the digitization trend that AI is accelerating. Physical document printing has declined 8–10% annually since 2020; hybrid work permanently reduced office printing volumes; AI-powered document processing eliminates the need for documents to exist in physical form at any point in enterprise workflows.</li>
+    <li>Xerox's transformation has followed two tracks: IT services expansion (acquiring small managed IT service providers) and Elem additive manufacturing (3D printing for industrial applications). The IT services strategy is logical but faces scale problems — this market is dominated by substantially larger, better-capitalized providers (Dell, HPE, Leidos, CDW) against whom Xerox lacks scale and AI platform differentiation. Elem represents less than 1% of revenue.</li>
+    <li>The financial sustainability of Xerox's transformation is the critical variable. Free cash flow has been constrained by restructuring charges and revenue decline, limiting capital available for IT services acquisitions. Xerox's $2B market capitalization reflects skepticism about its ability to replace physical product revenue with services revenue — a transition requiring both customer relationship development and financial endurance that the current balance sheet constrains.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Monitor Xerox's revenue mix: IT services and Elem revenue collectively reaching 25%+ of total by FY2028 is the minimum scale to partially offset print decline. Immediate signal: whether free cash flow remains positive through FY2026. If it turns negative, transformation investment capacity is structurally impaired.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- UIS -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Unisys</span>
+    <span class="company-score score-med">60<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">UIS · IT Services / Enterprise Computing · Market Cap ~$600M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>60</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Unisys's MEDIUM classification at ADS 60 reflects genuine structural challenges from AI automation of IT services offset by meaningful switching costs in its government and legacy enterprise client base. The ClearPath proprietary mainframe operating system — running critical applications for government agencies, financial institutions, and airlines — creates real migration barriers. Unisys's government business (approximately 45% of revenue) provides multi-year contract stability from agencies prioritizing security and reliability over cost optimization.</li>
+    <li>The AI displacement dynamic is most acute in IT services, where AIOps platforms are automating the infrastructure monitoring, service desk management, and network operations center workflows that represent Unisys's largest labor cost. Unisys's Stealth zero-trust security and digital workplace modernization address genuine enterprise pain points but compete against CrowdStrike, Palo Alto Networks, and Microsoft Sentinel — competitors with substantially larger AI R&amp;D budgets.</li>
+    <li>Approximately $1B in pension obligations consumes free cash flow that would otherwise fund AI product investment. Revenue at approximately $1.9B declining at mid-single digit rates creates a tightening investment window. An ADS of 60 places Unisys in MEDIUM risk — not structurally terminal like Xerox's hardware decline, but facing a challenging multi-year transition against better-capitalized competitors while managing a balance sheet constrained by legacy obligations.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Government contract renewal pipeline in 2026–2027 is the key monitoring signal. Federal AI modernization mandates create both risk (agencies may require AI-native capabilities Unisys cannot deliver) and opportunity (security clearances and existing relationships provide competitive advantage). Stealth ARR reaching $200M+ by FY2027 confirms the security platform transformation is on track.</div>
+</div>
+
+<!-- OTEX -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">OpenText</span>
+    <span class="company-score score-med">56<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">OTEX · Enterprise Content Management / Information Management · Market Cap ~$8B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>60</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>OpenText's MEDIUM classification at ADS 56 reflects the structural tension between its deep enterprise moats and the AI commoditization of its core information management markets. The Micro Focus acquisition ($6B, January 2023) transformed OpenText into a diversified enterprise software company spanning content management, application modernization, cybersecurity, and developer tools. FY2025 revenue of approximately $5.7B grew below the 8–10% organic targets implied at acquisition — integration complexity and AI competitive pressure compounding.</li>
+    <li>AI displacement risk is concentrated in the information management segments where cloud-native AI alternatives are gaining traction. Microsoft Purview competes directly with OpenText's Information Management offerings and benefits from Microsoft 365 bundling that makes it the default choice for enterprises already paying M365 enterprise licenses. AWS Textract, Azure AI Document Intelligence, and Google Document AI are commoditizing the intelligent document processing market at usage-based pricing well below OpenText's traditional per-seat model.</li>
+    <li>OpenText's competitive moat resides in regulated industries (pharmaceutical, financial services, government) where compliance requirements create data residency, audit trail, and sovereignty mandates that Microsoft's global cloud infrastructure cannot always satisfy. Titanium X AI platform represents the company's bet on becoming the AI-native information management layer for enterprise. An ADS of 56 reflects genuine near-term competitive pressure offset by meaningful regulatory moats in high-compliance verticals.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Cloud services revenue growth rate is the primary indicator — target is 20%+ cloud ARR growth by FY2026, confirming Titanium X is driving net new workloads. Microsoft's Purview enterprise penetration in OpenText's core verticals (legal, pharma, financial services) is the competitive displacement signal: if Purview captures 30%+ of new information governance contracts by FY2027, OpenText's addressable market is structurally compressing.</div>
+</div>
+
+<!-- MMS -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Maximus</span>
+    <span class="company-score score-med">52<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">MMS · Government BPO / Digital Services · Market Cap ~$4B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Maximus's MEDIUM classification at ADS 52 reflects a government BPO company navigating the transition from labor-intensive program administration to AI-augmented government services delivery. Its core business — administering government health and human services programs (Medicaid enrollment, Medicare appeals, ACA exchange operations) — is a $5B revenue franchise built on deep government relationships, security clearances, and program administration expertise. Multi-year contract stability provides runway for transformation.</li>
+    <li>The AI displacement dynamic is most acute in eligibility determination and contact center management. AI eligibility engines can automate 60–70% of routine Medicaid and ACA determinations that human caseworkers currently process. Contact center AI is reducing the labor per contact in government customer service. Maximus's competitive response — deploying these AI tools within its delivery model to improve margins — is the correct strategic direction. The question is whether it can demonstrate superior outcomes in competitive rebids versus AI-native government technology competitors (Palantir Government, Leidos AI, SAIC).</li>
+    <li>Maximus's clinical assessment business is the segment most exposed to AI disruption — clinical AI platforms are beginning to compete with human clinical screeners for disability determinations. An ADS of 52 reflects a company with meaningful protective factors (government relationships, security clearances, program expertise) providing near-term stability while it executes the AI-augmented delivery transformation.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> FY2026 contract rebid win rate at comparable or improving pricing is the primary signal. If Maximus wins rebids with AI-efficiency pricing that maintains margins, the AI-augmented delivery model is working. If rebid pricing requires margin compression to retain contracts, AI efficiency is accruing to government clients rather than Maximus. Secondary: digital services revenue reaching 15–20% of total.</div>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- HPE -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Hewlett Packard Enterprise</span>
+    <span class="company-score score-low">24<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">HPE · AI Server Infrastructure / Enterprise Cloud · Market Cap ~$35B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>Hewlett Packard Enterprise is experiencing a structural revenue acceleration driven by enterprise AI infrastructure investment. Q2 FY2026 revenue of $10.68B (+40% YoY) with AI orders of $2.1B and Cloud &amp; AI margins expanding from 6.6% to 12.4% represent HPE's best quarterly performance since separating from HP Inc. in 2015. The financial results validate HPE's strategic bet: ProLiant AI servers with NVIDIA H100 and B200 GPUs, HPE Cray AI supercomputers, and GreenLake as-a-service infrastructure.</li>
+    <li>HPE's competitive position benefits from two structural advantages: the NVIDIA design partnership (HPE is among the first certified NVIDIA AI server OEMs, enabling first-to-market delivery during GPU allocation periods) and GreenLake's as-a-service consumption model creating multi-year subscription revenue relationships that reduce dependence on lumpy hardware purchase cycles.</li>
+    <li>The primary structural risk is hyperscaler AI-as-a-Service commoditization. As AWS Bedrock, Azure AI, and Google Vertex AI provide AI inference at declining per-token prices, enterprise buyers may reduce on-premise AI infrastructure investment in favor of hyperscaler API consumption. An ADS of 24 reflects HPE's structural position as an AI infrastructure enabler, with primary risk being cycle-dependent rather than structural displacement.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Q3 and Q4 FY2026 AI order flow — if AI orders sustain above $2B per quarter, the AI server demand cycle is structurally durable. GreenLake AI workload ARR reaching 20% of total GreenLake ARR by FY2027 confirms successful transition from hardware sales to recurring AI infrastructure revenue.</div>
+</div>
+
+<!-- MDB -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">MongoDB</span>
+    <span class="company-score score-low">24<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">MDB · Developer Data Platform / AI Infrastructure · Market Cap ~$25B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>MongoDB is one of the clearest AI beneficiaries in the developer infrastructure category. The same generative AI applications that displace labor-intensive industries require sophisticated data platforms capable of storing documents, generating and searching vector embeddings, and providing low-latency operational data access — exactly what MongoDB Atlas provides. FY2026 revenue growth of 23% (Atlas +29%) with NRR >120% and Rule of 40 achievement demonstrates MongoDB is capturing the AI application buildout through database consumption.</li>
+    <li>The May 2026 AI agent feature launch — combining document storage, vector embeddings, full-text search, semantic reranking, and memory management in a single operational database — addresses the core data infrastructure challenge that production AI agent deployments face. MongoDB's solution eliminates the multi-database architectures that complicate production AI agent deployments. Management's framing of MongoDB as the 'developer data platform for AI agents' reflects genuine product-market alignment.</li>
+    <li>MongoDB's intermediation position is moderately thick. Applications built on Atlas have 3–5 year migration costs driven by document model data dependencies and developer workflow integration. The competitive risk is not that MongoDB loses existing customers, but that new AI-native applications are built on purpose-built vector databases (Pinecone, Weaviate) or hyperscaler-bundled alternatives rather than MongoDB. An ADS of 24 reflects a company whose technical roadmap is aligned with AI development requirements.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Atlas NRR sustainability above 120% through FY2026 confirms AI application development is driving durable consumption growth. AI agent feature adoption — if 30%+ of Atlas customers activate the May 2026 AI agent features (memory, embeddings, vector search) within 12 months of launch — is the forward revenue indicator confirming the unified AI data platform strategy is working.</div>
+</div>
+
+<!-- COHR -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Coherent Corp.</span>
+    <span class="company-score score-low">20<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">COHR · Photonic Components / AI Data Centers · Market Cap ~$15B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>Coherent Corp. is a critical AI infrastructure supplier undergoing a deliberate strategic transformation from a diversified photonics company into a focused AI data center optical solutions provider. The NVIDIA $2B strategic investment — announced in March 2026 — is the clearest possible signal that Coherent's InP transceiver and compound semiconductor capabilities are viewed as non-substitutable AI infrastructure. Q3 FY2026 revenue of $1.80B with datacenter at 75% of total confirms the transformation is already revenue-validated.</li>
+    <li>Coherent's compound semiconductor expertise — specifically indium phosphide (InP) and gallium arsenide (GaAs) VCSEL technology — is the core technical foundation for 800G and 1.6T transceivers. The physics of high-speed optical transceivers requires InP-based laser sources that silicon photonics cannot yet replicate at the same power efficiency. Coherent has mastered InP VCSEL manufacturing over multiple decades, creating a process knowledge moat that cannot be rapidly replicated regardless of capital investment.</li>
+    <li>Co-packaged optics (CPO) development with NVIDIA for next-generation AI server integration represents Coherent's forward positioning. CPO achieves 70–80% power reduction per optical link compared to pluggable alternatives. An ADS of 20 — in the lowest tier of the LOW risk category — reflects a company at the intersection of optical physics and AI infrastructure, where demand is driven by the scale requirements of AI model training rather than labor substitution economics.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> NVIDIA $2B investment deployment timing and Coherent's datacenter revenue sustainability above 75% mix with continued growth. The 1.6T transceiver ramp is the next product cycle — successful qualification by H1 2027 extends Coherent's AI infrastructure position through the next GPU generation. Risk: if CPO adoption accelerates faster than Coherent's CPO manufacturing readiness, there is a transition risk between pluggable transceiver volume and CPO revenue.</div>
+</div>
+
+<!-- MRVL -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Marvell Technology</span>
+    <span class="company-score score-low">18<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">MRVL · Custom AI Silicon / Data Center Networking · Market Cap ~$250B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>10</span></div>
+  </div>
+  <ul>
+    <li>Marvell Technology represents the clearest AI beneficiary in the ADS universe. FY2026 revenue of $8.195B (+42%) with $6.1B from AI data centers demonstrates the magnitude of the tailwind. The custom silicon business — growing from near-zero to $1.5B annual run rate in three years — reflects the secular shift by hyperscalers from merchant silicon to custom AI accelerators. Every major hyperscaler (Google TPU, Amazon Trainium/Inferentia, Microsoft Maia, Meta MTIA) relies on Marvell's semiconductor IP and SerDes technology to build custom AI accelerators.</li>
+    <li>The NVIDIA NVLink Fusion partnership announced in 2026 is the most significant strategic development in Marvell's history. NVLink Fusion enables hyperscalers to integrate custom AI accelerators with NVIDIA's GPU interconnect fabric — combining Marvell's custom silicon capabilities with NVIDIA's scale-up networking dominance. Jensen Huang's public endorsement of Marvell as a 'next trillion-dollar company' at Computex 2026 serves as both market validation and commercial signal. Q2 FY27 guidance of $2.7B (+35% YoY) confirms AI demand is not decelerating.</li>
+    <li>Marvell's intermediation position is deeply structural. The 3–5 year design-to-volume timeline for custom silicon means hyperscalers selecting Marvell for a new XPU generation commit 3–5 years of co-engineering investment. The joint IP created during co-design, the process technology selection, and the validated SerDes IP cannot be replicated by switching to a new silicon partner mid-generation. An ADS of 18 reflects minimal AI displacement risk and maximum AI infrastructure tailwind exposure.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Q2 FY27 guidance of $2.7B confirms whether AI data center demand is maintaining 30–35% growth momentum. Custom silicon revenue trajectory — specifically whether the $1.5B run rate expands to $3B+ by FY2028 as new hyperscaler XPU programs reach volume — is the structural growth signal. Monitor NVIDIA NVLink Fusion deployment announcements and whether a fourth major hyperscaler initiates a new Marvell custom silicon program.</div>
+</div>
+
+<!-- LITE -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Lumentum</span>
+    <span class="company-score score-low">16<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">LITE · Optical Networking / AI Data Centers · Market Cap ~$8B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>10</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>10</span></div>
+  </div>
+  <ul>
+    <li>Lumentum is a pure-play AI infrastructure beneficiary with one of the highest revenue growth rates in the ADS universe. Q3 FY2026 revenue of $808M (+90% YoY) with $400M+ OCS backlog and an incremental multi-hundred-million-dollar CPO order confirms hyperscaler AI infrastructure investment is creating extraordinary demand for Lumentum's photonic components — optical circuit switches and co-packaged optics. The physics of AI cluster scale determines Lumentum's demand trajectory: GPU-to-GPU bandwidth requirements scale with the square of GPU cluster size.</li>
+    <li>Lumentum's optical circuit switch (OCS) is the enabling technology for next-generation AI cluster architectures. Traditional electrical switches cannot provide the bandwidth density and reconfigurability required for AI training workloads that dynamically redistribute compute across GPU pools. OCS enables AI cluster architects to reconfigure fabric topology in microseconds. Google, Microsoft, and Amazon have all publicly committed to OCS deployment for AI cluster infrastructure — creating the multi-quarter backlog providing Lumentum revenue visibility through FY2027.</li>
+    <li>Co-packaged optics (CPO) is Lumentum's next growth catalyst. Traditional pluggable optical transceivers consume 20–30% of the power of an AI server's networking bandwidth — prohibitive at 100,000+ GPU cluster scales. CPO reduces power consumption 70–80%. NVIDIA's next-generation AI server architecture is designed around CPO integration and Lumentum's incremental multi-hundred-million CPO order represents production-scale commitment. An ADS of 16 — among the lowest in the ADS universe — reflects essentially zero AI displacement risk and maximum AI infrastructure demand exposure.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Lumentum's OCS backlog conversion rate is the production execution indicator. Monitor whether gross margins expand toward 50%+ as OCS volume scales. The CPO order delivery timeline (H1 2027) is the next major revenue catalyst: successful on-time delivery validates Lumentum's CPO manufacturing capability and positions it for follow-on CPO orders from additional hyperscalers.</div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section-label">📊 Issue #11 Score Summary</div>
+<table class="comparison">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-ticker">KD</td>
+      <td style="font-size:13px;">Kyndryl</td>
+      <td class="td-score score-high">70</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">XRX</td>
+      <td style="font-size:13px;">Xerox</td>
+      <td class="td-score score-high">70</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">80</td><td class="td-dim">80</td><td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">UIS</td>
+      <td style="font-size:13px;">Unisys</td>
+      <td class="td-score score-med">60</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">70</td><td class="td-dim">60</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">OTEX</td>
+      <td style="font-size:13px;">OpenText</td>
+      <td class="td-score score-med">56</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">60</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">MMS</td>
+      <td style="font-size:13px;">Maximus</td>
+      <td class="td-score score-med">52</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">70</td><td class="td-dim">40</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">HPE</td>
+      <td style="font-size:13px;">Hewlett Packard Enterprise</td>
+      <td class="td-score score-low">24</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">20</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">MDB</td>
+      <td style="font-size:13px;">MongoDB</td>
+      <td class="td-score score-low">24</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">20</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">COHR</td>
+      <td style="font-size:13px;">Coherent Corp.</td>
+      <td class="td-score score-low">20</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">MRVL</td>
+      <td style="font-size:13px;">Marvell Technology</td>
+      <td class="td-score score-low">18</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">10</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">LITE</td>
+      <td style="font-size:13px;">Lumentum</td>
+      <td class="td-score score-low">16</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">20</td><td class="td-dim">10</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">10</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="cta">
+  <div class="label">AI Displacement Score</div>
+  <div class="headline">110 companies scored. New issue every week.</div>
+  <p>Free on Substack — PDF reports, full methodology, and all past issues.</p>
+  <a href="https://danbikim.github.io/ads">All Issues →</a>
+</div>
+
+<div class="footer">
+  ADS Weekly · Issue #11 · June 3, 2026<br>
+  <a href="https://danbikim.github.io/ads">danbikim.github.io/ads</a><br><br>
+  D1: Labor Vulnerability · D2: Revenue Durability · D3: Competitive Moat · D4: Intermediation Risk · D5: Adaptation Capacity<br>
+  Scores are research estimates, not investment advice.
+</div>
+
+</body>
+</html>
