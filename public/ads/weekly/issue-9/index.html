@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #9 | May 13, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef3e6; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+  }
+  .dim span { font-weight: 700; color: #333; }
+
+  .company-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .company-card ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .company-card li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 4px;
+  }
+
+  .trigger {
+    background: #f8f8f8;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .comparison td {
+    padding: 8px 8px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">ADS Weekly · Issue #9</div>
+  <h1>The Knowledge Economy Reckoning</h1>
+  <p class="subtitle">May 13, 2026 · 10 companies scored · When AI reprices human expertise in healthcare, law, media, and education</p>
+</div>
+
+<div class="intro">
+  Issue #9 turns the lens on the knowledge economy — the sectors where human expertise was the product. <strong>LegalZoom (72)</strong> charged $300 to fill out an LLC form. <strong>Gannett (72)</strong> charged advertising dollars to have a human write a story. <strong>2U (70)</strong> charged a revenue share to put a professor's lecture online. All three now compete with a free API call. Meanwhile, <strong>Verisk (32)</strong> and <strong>Veeva (36)</strong> demonstrate that proprietary data moats compound in an AI world, and <strong>Tempus AI (28)</strong> is this issue's structural winner — it IS the AI doing the displacing.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- GCI -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Gannett</span>
+    <span class="company-score score-high">72<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">GCI · News Media / Local Journalism · Market Cap ~$250M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>90</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Gannett employs over 11,000 journalists and editorial staff. The core tasks — writing game recaps, election result summaries, earnings briefs, weather updates, and police blotter reports — are among the most automatable in professional services. AI-generated local news content is already competing for the same readership from AP, Arc Publishing, and direct AI-synthesis tools.</li>
+    <li>Digital ad revenue fell 14% year-over-year in the most recent quarter. This is a structural decline driven by search and social platform disintermediation, now amplified by AI-generated content that eliminates the human writing step. Google AI Overviews and similar systems displace article-discovery traffic that fuels Gannett's CPM revenue model.</li>
+    <li>Revenue durability (D2: 90) is the most alarming dimension — the company's business model is already in terminal decline and AI accelerates the timeline rather than initiating it. Gannett's attempted pivots (platform licensing, aggressive cost-cutting) are repositioning into a segment where AI has the structural cost and speed advantage.</li>
+  </ul>
+  <div class="trigger">Key trigger: Google AI Overviews query share exceeding 40% for local news categories is the displacement threshold. At that penetration, the display advertising model underwriting Gannett's newsroom economics collapses structurally rather than cyclically.</div>
+</div>
+
+<!-- LZ -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">LegalZoom</span>
+    <span class="company-score score-high">72<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">LZ · Online Legal Services · Market Cap ~$600M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>80</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>90</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>LegalZoom's core product — templated legal document generation for business formation, wills, and contracts — is now replicable with a free LLM prompt. Claude, ChatGPT, and Harvey AI can draft an LLC operating agreement or simple will in seconds with no subscription required, directly threatening the $200–$500 LegalZoom charges for the same output.</li>
+    <li>The intermediation risk dimension (D4: 90) is the highest in this issue. LegalZoom sits exactly between the customer and the underlying legal form — AI is collapsing that intermediary position by enabling direct self-service at zero marginal cost. The company's moat was information asymmetry and form complexity; AI eliminates both.</li>
+    <li>The subscription pivot and attorney network are the strategic lifelines, but subscription ARR growth has stalled and the attorney matchmaking segment faces free-tier competition. The company is transitioning from a form-filing business to a platform business in a market where AI has made the original value proposition obsolete.</li>
+  </ul>
+  <div class="trigger">Key trigger: LLM accuracy on state-specific LLC and estate document generation reaching 95%+ with user verification tools represents the commoditization threshold. At that point, LegalZoom's form-filing revenue (historically ~60% of total) faces existential substitution.</div>
+</div>
+
+<!-- TWOU -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">2U, Inc.</span>
+    <span class="company-score score-high">70<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">TWOU · Online Higher Education / OPM · Market Cap ~$200M</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>90</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>2U's OPM model — paying universities upfront for revenue-share rights on online degrees — requires sustained enrollment and pricing power eroding on both ends. AI tutoring platforms (Khan Academy's Khanmigo, Coursera's AI assistant) now replicate the instructional function of 2U's online programs at a fraction of the cost.</li>
+    <li>Revenue durability (D2: 90) reflects an already-stressed business model. The company filed for Chapter 11 in 2023 with ~$950M in debt and emerged restructured, but into a market where universities have less financial incentive to outsource and more capability to deliver online programs using AI-powered tools in-house.</li>
+    <li>The OPM model was predicated on the idea that online delivery was technically and operationally complex — requiring specialized expertise in content production, adaptive learning, and student support. AI has commoditized all three functions, erasing the justification for 2U's revenue-share premium.</li>
+  </ul>
+  <div class="trigger">Key trigger: University contract non-renewals accelerating above 15% annually would signal the structural end of the OPM intermediary model. The 2023 bankruptcy forced renegotiations on dozens of contracts at less favorable terms; the next renewal cycle will reveal whether the model has a viable equilibrium.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- EVH -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Evolent Health</span>
+    <span class="company-score score-med">64<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">EVH · Healthcare Services / Value-Based Care · Market Cap ~$2.2B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>60</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Evolent's workforce is heavily concentrated in clinical coordinators, care management nurses, and utilization review staff — roles where AI decision-support tools are reducing per-case labor requirements by 30–50% in comparable operations. AI-powered prior authorization platforms (Cohere Health, Waystar) are automating the clinical workflows Evolent delivers.</li>
+    <li>Revenue concentration risk is material: the loss of a single major health plan contract can remove $300M+ in revenue, as demonstrated by the Molina departure in 2023. As payers build AI-native utilization management capabilities in-house, Evolent's switching-cost position weakens.</li>
+    <li>The company has genuine clinical analytics capabilities and regulatory relationships that provide near-term moat — the MEDIUM score reflects that displacement is real but not immediate. The 3–5 year transition period while payers build internal capabilities gives Evolent time to deepen integration and expand into AI-augmented services.</li>
+  </ul>
+  <div class="trigger">Key trigger: A major payer (UnitedHealth, Humana, Aetna) announcing an AI-native internal prior authorization platform at scale would signal the beginning of the disintermediation cycle for Evolent's core utilization management revenue.</div>
+</div>
+
+<!-- TDOC -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Teladoc Health</span>
+    <span class="company-score score-med">58<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">TDOC · Telehealth / Digital Health · Market Cap ~$1.5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>60</span></div>
+    <div class="dim">D2 <span>60</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Teladoc's $18.5B acquisition of Livongo at peak valuation resulted in a $13.7B goodwill impairment — the most visible sign that the market has repriced the telehealth model. The company is now valued at ~$1.5B on $2.5B+ in revenue, reflecting structural skepticism about the physician-as-intermediary model.</li>
+    <li>AI symptom checkers, triage assistants, and clinical decision support tools are handling the initial patient contact layer that Teladoc physicians currently serve. Routine telemedicine visits (UTIs, colds, rashes, medication refills) are the highest-volume and most AI-substitutable use cases on the platform.</li>
+    <li>The mental health platform (BetterHelp) faces dual pressure: commoditization from AI therapy tools and regulatory/reputational scrutiny. The enterprise B2B segment is more defensible but growing slowly, and the payor integration model requires maintaining physician relationships that AI is gradually making redundant.</li>
+  </ul>
+  <div class="trigger">Key trigger: Amazon Clinic or a major payor-embedded AI triage product capturing &gt;5% of the routine telehealth visit market would compress Teladoc's volume and average revenue per visit simultaneously, triggering a structural repricing of the physician intermediary model.</div>
+</div>
+
+<!-- INST -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Instructure Holdings</span>
+    <span class="company-score score-med">52<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">INST · Learning Management / EdTech · Market Cap ~$2.5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>60</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>Instructure's Canvas LMS dominates U.S. higher education with ~30% market share and long-term institutional contracts — meaningful revenue durability. But the LMS is infrastructure, not intelligence. It is increasingly becoming the carrier for AI tools that may eventually displace the need for a separate LMS layer entirely.</li>
+    <li>AI-native learning platforms (Khanmigo, Carnegie Learning, Synthesis) are building instructional content and adaptive assessment capabilities that Canvas hosts but does not originate. The intermediation layer (D4: 70) is the risk vector: Canvas connects students to course content and professors to administrative workflows, but AI is commoditizing both endpoints.</li>
+    <li>Adaptation Capacity (D5: 30) is the critical weakness. Instructure has been slow to build native AI features into Canvas, relying on third-party LTI integrations while competitors build AI-first platforms from scratch. The Thoma Bravo private equity overlay adds financial engineering pressure that may constrain the R&amp;D investment needed to adapt.</li>
+  </ul>
+  <div class="trigger">Key trigger: A major R1 university system announcing a transition to an AI-native LMS or a direct contract with an AI tutoring provider that bypasses the LMS layer would be the structural inflection point for Instructure's institutional moat.</div>
+</div>
+
+<!-- DOCS -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Doximity</span>
+    <span class="company-score score-med">44<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">DOCS · Healthcare Professional Network · Market Cap ~$6.5B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>60</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>Doximity has genuinely strong network effects among U.S. physicians (~80% verified reach) and high-margin pharma marketing revenue — the highest-quality defensive position in this issue. But the intermediation layer it occupies is being compressed by AI-generated targeted pharma outreach that requires less broadcast media spending.</li>
+    <li>The company's own AI features (clinical note drafting, prior auth tools) are value-adds that slow displacement — but also demonstrate that the defensible value is shifting from network access to AI tools, a transition Doximity may not fully capture at its current scale and pace of AI investment.</li>
+    <li>Near-term earnings power remains strong (&gt;40% EBITDA margins), but revenue growth has decelerated from 50%+ to mid-single digits. The pharma marketing budget allocation is structurally uncertain as AI changes drug rep workflows and reduces the premium placed on physician network reach.</li>
+  </ul>
+  <div class="trigger">Key trigger: Pharma companies reducing Doximity marketing spend in favor of AI-targeted direct outreach tools in H2 2026 earnings guidance would signal the beginning of the platform premium compression for physician network advertising.</div>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- VEEV -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Veeva Systems</span>
+    <span class="company-score score-low">36<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">VEEV · Life Sciences Cloud / Pharma CRM · Market Cap ~$34B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>30</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Veeva has exceptional switching costs: pharmaceutical companies run clinical trials, regulatory submissions, and global sales operations on Veeva Vault. Migration to an alternative involves multi-year re-validation, regulatory filing updates, and global retraining — the highest category of enterprise switching cost in software.</li>
+    <li>Revenue durability (D2: 20) reflects the non-cyclical, contractually locked-in nature of pharma R&amp;D and commercial spending. The life sciences sector has not materially compressed IT budgets even during patent cliffs, providing exceptional revenue visibility that AI disruption timelines cannot compress quickly.</li>
+    <li>The transition from Salesforce CRM to Veeva CRM (own platform) is proceeding on schedule and reduces platform dependency risk, strengthening the long-term moat. Veeva is repositioning from a customer of Salesforce infrastructure to an independent cloud platform with its own development ecosystem.</li>
+  </ul>
+  <div class="trigger">Key trigger: Salesforce's Life Sciences Cloud gaining &gt;10% CRM market share in biopharma would signal competitive pressure, but the clinical data management Vault business (higher-value, more defensible) would need a purpose-built competitor to be truly threatened.</div>
+</div>
+
+<!-- VRSK -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Verisk Analytics</span>
+    <span class="company-score score-low">32<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">VRSK · Data Analytics / Insurance &amp; Risk · Market Cap ~$37B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>Verisk's ISO policy language and actuarial databases are embedded in the regulatory and contractual fabric of U.S. insurance. Insurers file rates based on ISO loss costs — a regulatory integration that is not substitutable by AI-generated alternatives in any near-term timeframe.</li>
+    <li>The company's data assets — decades of claims data, property records, and catastrophe modeling calibrations — are proprietary training material that would be required to replicate the accuracy of Verisk's models. AI amplifies rather than replaces this data moat: better models trained on exclusive data widen the competitive gap.</li>
+    <li>Adaptation capacity (D5: 50) is above average in this issue. Verisk is actively deploying ML across AIR Worldwide catastrophe modeling and claims analytics, positioning itself to use AI offensively. Climate-tech AI startups competing at the edges (property risk assessment) represent a long-term watch, not a near-term threat.</li>
+  </ul>
+  <div class="trigger">Key trigger: A major insurer building an in-house catastrophe modeling capability that reduces AIR Worldwide usage would signal erosion of the most defensible segment. The data regulatory moat is the harder wedge to attack, but the proprietary modeling premium is where competitive pressure appears first.</div>
+</div>
+
+<!-- TEM -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Tempus AI</span>
+    <span class="company-score score-low">28<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">TEM · AI-Powered Precision Medicine · Market Cap ~$8B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>20</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>10</span></div>
+    <div class="dim">D5 <span>70</span></div>
+  </div>
+  <ul>
+    <li>Tempus is the AI in the AI displacement equation. Its multimodal clinical dataset (genomic sequences, clinical records, imaging) and the models trained on it represent the output that is displacing manual pathology review, treatment selection, and clinical trial matching — the activities it does not perform, it makes more efficient.</li>
+    <li>The data network effect is the primary moat: each new patient record makes the models more accurate, which attracts more clinical partnerships, which generates more data. This is a fundamentally compounding asset in an AI-first healthcare world — the opposite dynamic from knowledge intermediaries losing value as AI commoditizes their output.</li>
+    <li>Revenue durability risk (D2: 20) is low because precision oncology is a growing market: AI-driven treatment selection expands the addressable opportunity by enabling protocols that weren't feasible without genomic-scale data analysis. The company's highest risk is competitive — Foundation Medicine, NVIDIA BioNeMo, and Illumina's AI initiatives — not displacement by AI itself.</li>
+  </ul>
+  <div class="trigger">Key trigger to watch (competitive, not displacement): NVIDIA BioNeMo or a similar foundational genomics model achieving open-source accuracy comparable to Tempus's clinical models would compress the proprietary data premium. The Intermediation score (D4: 10) is the lowest in this issue — Tempus is a native AI infrastructure layer, not an intermediary waiting to be removed.</div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section-label">Issue #9 — Score Summary</div>
+
+<table class="comparison">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-ticker">GCI</td>
+      <td style="font-size:13px;">Gannett</td>
+      <td class="td-score score-high">72</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">80</td><td class="td-dim">90</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">LZ</td>
+      <td style="font-size:13px;">LegalZoom</td>
+      <td class="td-score score-high">72</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">80</td><td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">90</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">TWOU</td>
+      <td style="font-size:13px;">2U, Inc.</td>
+      <td class="td-score score-high">70</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">70</td><td class="td-dim">90</td><td class="td-dim">70</td><td class="td-dim">80</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">EVH</td>
+      <td style="font-size:13px;">Evolent Health</td>
+      <td class="td-score score-med">64</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">80</td><td class="td-dim">60</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">TDOC</td>
+      <td style="font-size:13px;">Teladoc Health</td>
+      <td class="td-score score-med">58</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">60</td><td class="td-dim">60</td><td class="td-dim">50</td><td class="td-dim">70</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">INST</td>
+      <td style="font-size:13px;">Instructure</td>
+      <td class="td-score score-med">52</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">30</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">DOCS</td>
+      <td style="font-size:13px;">Doximity</td>
+      <td class="td-score score-med">44</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">30</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">30</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">VEEV</td>
+      <td style="font-size:13px;">Veeva Systems</td>
+      <td class="td-score score-low">36</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">50</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">VRSK</td>
+      <td style="font-size:13px;">Verisk Analytics</td>
+      <td class="td-score score-low">32</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">TEM</td>
+      <td style="font-size:13px;">Tempus AI</td>
+      <td class="td-score score-low">28</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">10</td><td class="td-dim">70</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="cta">
+  <div class="label">AI Displacement Score</div>
+  <div class="headline">90 companies scored. New issue every week.</div>
+  <p>Free on Substack — PDF reports, full methodology, and all past issues.</p>
+  <a href="https://danbikim.github.io/ads">All Issues →</a>
+</div>
+
+<div class="footer">
+  ADS Weekly · Issue #9 · May 13, 2026<br>
+  <a href="https://danbikim.github.io/ads">danbikim.github.io/ads</a><br><br>
+  D1: Labor Vulnerability · D2: Revenue Durability · D3: Competitive Moat · D4: Intermediation Risk · D5: Adaptation Capacity<br>
+  Scores are research estimates, not investment advice.
+</div>
+
+</body>
+</html>

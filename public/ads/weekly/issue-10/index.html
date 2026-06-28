@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADS Weekly — Issue #10 | May 20, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .milestone-badge {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .intro {
+    background: #fafafa;
+    border-left: 3px solid #1a1a1a;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .intro strong { color: #1a1a1a; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .company-card {
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .company-card:last-child { border-bottom: none; }
+
+  .company-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .company-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+  .company-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .score-high { color: #c0392b; }
+  .score-med  { color: #e67e22; }
+  .score-low  { color: #27ae60; }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .badge-high { background: #fdecea; color: #c0392b; }
+  .badge-med  { background: #fef5e7; color: #e67e22; }
+  .badge-low  { background: #eafaf1; color: #27ae60; }
+
+  .company-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .dim-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: #f5f5f5;
+    padding: 4px 9px;
+    border-radius: 2px;
+    color: #555;
+  }
+  .dim span { font-weight: 700; color: #1a1a1a; margin-left: 3px; }
+
+  ul { padding-left: 18px; margin-bottom: 12px; }
+  ul li {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .trigger {
+    background: #f9f9f9;
+    border-left: 2px solid #ccc;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+    margin-top: 12px;
+  }
+  .trigger strong { color: #1a1a1a; font-style: normal; }
+
+  table.comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  table.comparison th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    padding: 8px 6px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+  table.comparison td {
+    padding: 8px 6px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+  }
+  .td-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+  }
+  .td-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+  }
+  .td-dim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+
+  .cta {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .cta .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cta .headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .cta p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer a { color: #aaa; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="milestone-badge">★ Issue #10 · 100 Companies Scored</div>
+  <div class="kicker">ADS Weekly · Issue #10</div>
+  <h1>Infrastructure vs. Obsolescence</h1>
+  <p class="subtitle">May 20, 2026 · 10 companies scored · AI's dual effect on enterprise technology — compounding the value of essential infrastructure while erasing the value of human process intermediaries</p>
+</div>
+
+<div class="intro">
+  Issue #10 draws the sharpest contrast the ADS framework has produced: the same AI buildout that threatens <strong>Navient (78)</strong> and <strong>WNS (68)</strong> is compounding the value of <strong>Arm Holdings (14)</strong> and <strong>Datadog (22)</strong>. AI is not a uniform risk — it is a divergence engine. Companies that own essential infrastructure or proprietary data compound in an AI world. Companies that mediate human processes get automated around. <strong>Paycom (46)</strong> is this issue's most instructive case: its best AI innovation is simultaneously its biggest revenue headwind.
+</div>
+
+<!-- HIGH RISK -->
+<div class="section-label">🔴 High Displacement Risk (65+)</div>
+
+<!-- NAVI -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Navient</span>
+    <span class="company-score score-high">78<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">NAVI · Student Loan Servicing / Consumer Finance · Market Cap ~$1.0B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>90</span></div>
+    <div class="dim">D3 <span>80</span></div>
+    <div class="dim">D4 <span>80</span></div>
+    <div class="dim">D5 <span>70</span></div>
+  </div>
+  <ul>
+    <li>Navient's core FFELP student loan servicing portfolio is in terminal runoff — amortizing 8–10% annually with no new originations. The federal servicing contract was lost in 2022. This structural decline is independent of AI and already underway; AI compounds it by reducing the labor intensity of the remaining book, compressing revenue per FTE in a shrinking business.</li>
+    <li>The healthcare revenue cycle management pivot enters a market dominated by AI-native incumbents: Optum, Cotiviti, Change Healthcare (Oracle), and Waystar have all invested $500M+ in AI-powered claims automation. Navient competes without proprietary clinical data, payer relationship depth, or AI platform differentiation — the three things that define competitive position in RCM.</li>
+    <li>Revenue durability (D2: 90) is the highest risk dimension. The business model is in structural decline independent of AI disruption; AI is an accelerant, not the root cause. The ADS of 78 makes Navient the highest-risk company in Issue #10 and the second-highest in the full 100-company universe, behind Chegg (90).</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Healthcare RCM revenue reaching $300M+ by FY2027 is the threshold for structural viability. If it does not, the decline scenario accelerates beyond the point where capital allocation can reverse it. Governance wildcard: whether the board accelerates strategic review given the stock's discount to book value.</div>
+</div>
+
+<!-- WNS -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">WNS Holdings</span>
+    <span class="company-score score-high">68<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-high">HIGH</span></span>
+  </div>
+  <div class="company-meta">WNS · Business Process Outsourcing · Market Cap ~$1.6B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>70</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>50</span></div>
+  </div>
+  <ul>
+    <li>WNS employs ~60,000 people in finance &amp; accounting, insurance, travel, and healthcare BPO — all high-automation-exposure categories (O*NET 65–80%). The insurance vertical, WNS's largest revenue segment, is experiencing accelerating AI deployment in claims processing, adjudication, and underwriting support. The company's own AI tools are increasing throughput per FTE — a signal that the labor-arbitrage model is compressing.</li>
+    <li>Contract-driven revenue with 3–5 year renewals provides near-term stability, but AI productivity clauses are appearing at renewal: clients negotiate lower per-transaction pricing as automation reduces billable labor hours. FY2026 revenue growth has significantly decelerated from the prior 15–20% trajectory. Revenue per FTE is the monitoring metric.</li>
+    <li>WNS's $1.6B market cap limits the R&amp;D investment needed to build a proprietary AI platform that competes with Cognizant ($35B) or Accenture ($200B+). The 'AI-augmented BPO' positioning is defensible near-term but creates a structural migration problem: as AI handles more cases, the 'human judgment' premium shrinks proportionally.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Revenue per employee declining 5%+ YoY signals AI productivity gains accruing to clients via repriced contracts rather than to WNS via margin expansion. Track FTE headcount relative to revenue growth — the ratio reveals whether WNS is capturing or surrendering the automation efficiency.</div>
+</div>
+
+<!-- MEDIUM RISK -->
+<div class="section-label">🟡 Medium Displacement Risk (40–64)</div>
+
+<!-- G -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Genpact</span>
+    <span class="company-score score-med">64<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">G · Business Process Outsourcing / AI Services · Market Cap ~$6.7B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>80</span></div>
+    <div class="dim">D2 <span>60</span></div>
+    <div class="dim">D3 <span>70</span></div>
+    <div class="dim">D4 <span>70</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>Genpact's ~125,000 employees are 70–75% concentrated in F&amp;A, collections, data entry, and claims — O*NET 65–80% automation exposure. The company's own AI Runway platform automates the BPO services it sells to clients, creating a structural tension: deploying AI internally compresses headcount while deploying AI externally compresses per-transaction pricing at renewal.</li>
+    <li>Q1 2026 revenue flat-to-down YoY — the 'fewer hours per dollar of client value' dynamic is visible. Genpact's largest clients (global corporations with $1B+ F&amp;A outsourcing contracts) are deploying Microsoft Copilot for Finance and SAP AI directly into processes Genpact manages. Clients see the automation efficiency and demand pricing adjustments at renewal.</li>
+    <li>The pivot to AI transformation advisory is the correct strategic direction but faces a credibility gap: Accenture invested $3B+ in AI capability over five years to build that advisory position. Genpact is attempting the same transition at $6.7B market cap. The differentiation must rely on sector-specific process knowledge rather than raw R&amp;D scale.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> If 'digital operations and AI services' revenue reaches 50%+ of total by FY2027, the transformation pivot is working. If it stalls below 40%, Genpact remains structurally a labor BPO with AI branding — and ADS migrates toward HIGH territory at the next annual review.</div>
+</div>
+
+<!-- TNET -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">TriNet Group</span>
+    <span class="company-score score-med">54<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">TNET · Professional Employer Organization / HR Services · Market Cap ~$2.0B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>50</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>60</span></div>
+    <div class="dim">D5 <span>40</span></div>
+  </div>
+  <ul>
+    <li>TriNet's PEO value proposition — compliance expertise for SMBs — is being automated at the component level. Federal and state employment law guidance, ACA benefits administration, workers' comp, and payroll tax accuracy: AI is automating each one. When Rippling's AI generates a compliant HR policy in seconds, the expertise differential that justifies TriNet's 1–3% of payroll fee narrows.</li>
+    <li>Worksite employee (WSE) count has been flat-to-declining as SMB hiring softens. WSE is the volume driver of PEO economics — no WSE growth means no organic revenue growth. AI-native PEO competitors (Rippling, Justworks) are building co-employment capabilities that challenge TriNet's incumbent position with a more modern tech stack and lower pricing.</li>
+    <li>The co-employment model creates legal and administrative stickiness (genuine intermediation thickness at D4: 60), but this moat is eroding at the edges. TriNet's AI features are 18–24 months behind AI-native competitors. The differentiation must ultimately rely on 20+ years of SMB compliance outcomes and benefits actuarial data — an asset that is currently underexploited.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> WSE growth returning to 3–5% by Q3 2026 signals the model is stabilizing. Revenue per WSE declining 5%+ signals AI-native pricing competition is materializing at renewal. Both metrics are directly readable from quarterly earnings.</div>
+</div>
+
+<!-- PAYC -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Paycom Software</span>
+    <span class="company-score score-med">46<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-med">MEDIUM</span></span>
+  </div>
+  <div class="company-meta">PAYC · Human Capital Management SaaS · Market Cap ~$8.0B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>70</span></div>
+    <div class="dim">D2 <span>40</span></div>
+    <div class="dim">D3 <span>40</span></div>
+    <div class="dim">D4 <span>50</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>Paycom's most important AI product — Beti — allows employees to process and verify their own payroll, reducing error rates by 90%+. It is the company's clearest product innovation and its clearest revenue headwind simultaneously. The managed-service value that Paycom charged for (catching and correcting payroll errors) is now automated at near-zero marginal cost by the product itself.</li>
+    <li>Revenue growth has decelerated from 25–30% to 9% YoY as Beti penetrates the installed base. Paycom is transitioning from a high-value managed payroll service to a commoditized SaaS payroll platform — a structurally lower-multiple business model. The market's reassessment is rational: a company growing at 9% on $2B+ ARR with compressed per-seat economics deserves significant multiple compression.</li>
+    <li>International expansion and GONE (automated shift management) are the primary growth offsets. International HCM is a $15B+ market where Paycom's single-database architecture has differentiation. If international revenue scales to 10%+ of total by FY2027, the domestic revenue-per-seat compression has an offset. The ADS of 46 reflects a company with genuine competitive advantages and self-inflicted revenue headwinds from successful AI deployment.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Revenue per employee per quarter stabilizing (post-Beti saturation) and international revenue reaching 10%+ of total by FY2027 would signal structural trough-and-recovery. Continued revenue per seat decline past Beti adoption plateau signals deeper structural commoditization.</div>
+</div>
+
+<!-- LOW RISK -->
+<div class="section-label">🟢 Low Displacement Risk (&lt;40)</div>
+
+<!-- CSGP -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">CoStar Group</span>
+    <span class="company-score score-low">36<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">CSGP · Commercial Real Estate Data &amp; Marketplaces · Market Cap ~$13.8B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>50</span></div>
+    <div class="dim">D2 <span>30</span></div>
+    <div class="dim">D3 <span>30</span></div>
+    <div class="dim">D4 <span>40</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>CoStar's commercial real estate database — 35 years of verified comparable sales, lease transactions, and property records — is the closest equivalent in real estate data to a Bloomberg terminal. Institutional CRE underwriting (CBRE, JLL, Cushman &amp; Wakefield) cannot function without it. AI automation of data entry (10,000+ daily property updates) improves operational efficiency but does not threaten the 35-year data asset itself.</li>
+    <li>Homes.com residential expansion is CoStar's $3.8B strategic bet. The challenge is structural: Zillow has 10x+ Homes.com's consumer traffic, meaning AI product parity (Homes AI vs. Zillow AI) does not translate to market share without winning the traffic flywheel first. The $1B+ annual marketing investment is the mechanism — but traffic, not technology, is the constraint.</li>
+    <li>The Matterport acquisition is CoStar's most underappreciated AI asset: millions of 3D property scans give Homes.com a proprietary visual data asset for AI-powered immersive search. If AI home search evolves toward 3D virtual walkthrough experiences, Matterport data becomes a genuine differentiator that Zillow cannot easily replicate.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Homes.com reaching 100M+ monthly unique visitors by Q4 2026 (vs. estimated 40–50M current) signals traffic flywheel approaching self-sustainability. Below 75M despite $1B+ marketing suggests the residential strategy requires fundamental reassessment.</div>
+</div>
+
+<!-- SMCI -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Super Micro Computer</span>
+    <span class="company-score score-low">34<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">SMCI · AI Server Infrastructure / Data Center Hardware · Market Cap ~$18B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>30</span></div>
+    <div class="dim">D3 <span>50</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>Super Micro's 123% revenue growth in FY2026 validates the AI server bet placed in 2023. The $13B Blackwell GPU backlog provides near-term visibility. The core structural risk is not AI displacement — it is AI server commoditization. Gross margin contracted 550bps to 6.4%, the most visible evidence that Dell, HPE, and ODM manufacturers (Quanta, Foxconn) are competing aggressively on price as Blackwell configurations standardize.</li>
+    <li>A 6.4% gross margin provides $64M of gross profit per $1B of revenue — structurally insufficient to fund the R&amp;D required to maintain liquid-cooling leadership through successive GPU generations without the diversified revenue cushion that Dell and HPE carry. The commoditization risk is real and growing.</li>
+    <li>Governance (delayed 10-K, EY→BDO auditor change) prevents institutional investors from building large positions despite the extraordinary AI infrastructure tailwind. The BDO audit completion is the immediate stock catalyst — governance clarity unlocks the institutional buyer base.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> Gross margin stabilizing at 8–10% through the NVIDIA Rubin GPU generation transition signals the liquid-cooling moat is durable. Gross margin declining below 6% on Rubin orders signals continued commoditization. BDO audit completion date is the governance catalyst.</div>
+</div>
+
+<!-- WK -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Workiva</span>
+    <span class="company-score score-low">30<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">WK · Financial Reporting / Regulatory Compliance SaaS · Market Cap ~$2.6B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>40</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>30</span></div>
+    <div class="dim">D4 <span>30</span></div>
+    <div class="dim">D5 <span>30</span></div>
+  </div>
+  <ul>
+    <li>Workiva is an ADS beneficiary: the SEC's AI disclosure guidance (requiring companies to disclose material AI-related risks) and CSRD/ISSB sustainability reporting mandates are expanding Workiva's addressable market. AI is generating disclosure complexity faster than Workiva's installed base can manage without structured tools. Revenue grew 20% YoY in Q1 2026 with NRR above 110%.</li>
+    <li>The intermediation position is genuinely thick. Big 4 auditors integrate directly into Workiva review workflows; finance, legal, IR, and audit committees all collaborate in the platform. Workiva's AI features are trained on each client's proprietary historical filings — contextual and non-portable. A competitor cannot replicate the AI without the underlying client data.</li>
+    <li>The primary risk is multi-solution cross-sell velocity reaching saturation (currently 75% multi-solution penetration). New solution categories — tax, treasury, board reporting — are needed to sustain 20% growth beyond FY2027. Regulatory mandate timelines in Europe are a secondary risk: any CSRD deferral would slow the fastest-growing compliance reporting category.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> New solution category launches in H2 2026 (tax reporting, treasury risk). NRR stability above 110% is the baseline health check. CSRD enforcement timeline in Europe is the regulatory variable to monitor.</div>
+</div>
+
+<!-- DDOG -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Datadog</span>
+    <span class="company-score score-low">22<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">DDOG · Observability / Cloud Monitoring SaaS · Market Cap ~$66B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>20</span></div>
+    <div class="dim">D3 <span>20</span></div>
+    <div class="dim">D4 <span>20</span></div>
+    <div class="dim">D5 <span>20</span></div>
+  </div>
+  <ul>
+    <li>Datadog's first $1B quarter (Q1 2026, +32% YoY) validates the AI monitoring thesis. 6,500+ customers send data for AI integrations, representing 80% of ARR. GPU monitoring, LLM observability, AI pipeline security — all new monitoring categories that didn't exist 24 months ago. Datadog monitors the AI infrastructure. The more AI scales, the more monitoring demand grows.</li>
+    <li>600+ integrations embedded across every layer of the modern tech stack. Switching costs are extreme: years of dashboards, alert configurations, runbooks, and institutional knowledge are stored in Datadog. Hyperscalers are turning to Datadog for GPU and AI infrastructure monitoring rather than building in-house capabilities. Datadog is the observability layer for the AI era.</li>
+    <li>MCP Server integration connects Datadog telemetry to Claude, GPT-4, and enterprise AI agents — positioning the company for the agentic AI era where AI agents need real-time infrastructure data to make autonomous decisions. This is offensive product expansion, not defensive repositioning. ADS of 22 reflects near-floor risk across all five dimensions.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> The downside scenario is not AI displacement of Datadog — it is hyperscaler CapEx deceleration reducing the AI infrastructure build that drives Datadog growth. Monitor AWS/Azure/Google infrastructure CapEx guidance for early deceleration signals. NRR above 120% sustained is the primary health check.</div>
+</div>
+
+<!-- ARM -->
+<div class="company-card">
+  <div class="company-header">
+    <span class="company-name">Arm Holdings</span>
+    <span class="company-score score-low">14<span style="font-size:14px;font-weight:400;">/100</span> <span class="badge badge-low">LOW</span></span>
+  </div>
+  <div class="company-meta">ARM · Semiconductor IP / Chip Architecture · Market Cap ~$233B</div>
+  <div class="dim-row">
+    <div class="dim">D1 <span>30</span></div>
+    <div class="dim">D2 <span>10</span></div>
+    <div class="dim">D3 <span>10</span></div>
+    <div class="dim">D4 <span>10</span></div>
+    <div class="dim">D5 <span>10</span></div>
+  </div>
+  <ul>
+    <li>Arm is the lowest ADS in Issue #10 — and among the lowest in the full 100-company universe — because it is the architectural foundation that all AI chips are built on. Every AI training cluster, every inference chip, every edge AI device uses Arm architecture. The royalty model means Arm collects a tax on every AI chip shipped, at zero incremental operating cost. The more AI scales, the more royalties flow.</li>
+    <li>The Armv9 architecture transition carries a 2–3x royalty rate premium over Armv8. As AI workloads drive chipmakers to adopt Armv9 (enhanced matrix math, power efficiency, security), Arm's revenue per chip shipped expands without volume growth. FY2026 revenue was $4.92B (+23% YoY). FY2031 guidance: $25B. The compounding of volume growth and rate expansion makes this a unique financial model in the semiconductor industry.</li>
+    <li>The AGI CPU announced in March 2026 — Arm's first in-house chip in 35 years — transforms the company from IP licensor to vertically integrated AI compute provider. Meta is the lead co-development partner. OpenAI, Cloudflare, SAP, and SK Telecom committed as customers. Estimated $15B annual revenue potential in 5 years if the AGI CPU executes.</li>
+  </ul>
+  <div class="trigger"><strong>Key trigger:</strong> AGI CPU tape-out schedule and initial customer benchmarks (expected 2027). The royalty business alone is exceptional — the AGI CPU is the upside scenario. If Meta deploys AGI CPU in production AI training clusters by FY2028, the product viability is proven. If it delays, the royalty business sustains independently.</div>
+</div>
+
+<!-- SCORE SUMMARY TABLE -->
+<div class="section-label">Issue #10 — Score Summary</div>
+
+<table class="comparison">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Company</th>
+      <th>ADS</th>
+      <th>Risk</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
+      <th>D4</th>
+      <th>D5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-ticker">NAVI</td>
+      <td style="font-size:13px;">Navient</td>
+      <td class="td-score score-high">78</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">80</td><td class="td-dim">90</td><td class="td-dim">80</td><td class="td-dim">80</td><td class="td-dim">70</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">WNS</td>
+      <td style="font-size:13px;">WNS Holdings</td>
+      <td class="td-score score-high">68</td>
+      <td><span class="badge badge-high">HIGH</span></td>
+      <td class="td-dim">80</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">50</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">G</td>
+      <td style="font-size:13px;">Genpact</td>
+      <td class="td-score score-med">64</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">80</td><td class="td-dim">60</td><td class="td-dim">70</td><td class="td-dim">70</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">TNET</td>
+      <td style="font-size:13px;">TriNet Group</td>
+      <td class="td-score score-med">54</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">70</td><td class="td-dim">50</td><td class="td-dim">50</td><td class="td-dim">60</td><td class="td-dim">40</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">PAYC</td>
+      <td style="font-size:13px;">Paycom Software</td>
+      <td class="td-score score-med">46</td>
+      <td><span class="badge badge-med">MEDIUM</span></td>
+      <td class="td-dim">70</td><td class="td-dim">40</td><td class="td-dim">40</td><td class="td-dim">50</td><td class="td-dim">30</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">CSGP</td>
+      <td style="font-size:13px;">CoStar Group</td>
+      <td class="td-score score-low">36</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">50</td><td class="td-dim">30</td><td class="td-dim">30</td><td class="td-dim">40</td><td class="td-dim">30</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">SMCI</td>
+      <td style="font-size:13px;">Super Micro</td>
+      <td class="td-score score-low">34</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">40</td><td class="td-dim">30</td><td class="td-dim">50</td><td class="td-dim">30</td><td class="td-dim">20</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">WK</td>
+      <td style="font-size:13px;">Workiva</td>
+      <td class="td-score score-low">30</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">40</td><td class="td-dim">20</td><td class="td-dim">30</td><td class="td-dim">30</td><td class="td-dim">30</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">DDOG</td>
+      <td style="font-size:13px;">Datadog</td>
+      <td class="td-score score-low">22</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">30</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td><td class="td-dim">20</td>
+    </tr>
+    <tr>
+      <td class="td-ticker">ARM</td>
+      <td style="font-size:13px;">Arm Holdings</td>
+      <td class="td-score score-low">14</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td class="td-dim">30</td><td class="td-dim">10</td><td class="td-dim">10</td><td class="td-dim">10</td><td class="td-dim">10</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="cta">
+  <div class="label">AI Displacement Score</div>
+  <div class="headline">100 companies scored. New issue every week.</div>
+  <p>Free on Substack — PDF reports, full methodology, and all past issues.</p>
+  <a href="https://danbikim.github.io/ads">All Issues →</a>
+</div>
+
+<div class="footer">
+  ADS Weekly · Issue #10 · May 20, 2026<br>
+  <a href="https://danbikim.github.io/ads">danbikim.github.io/ads</a><br><br>
+  D1: Labor Vulnerability · D2: Revenue Durability · D3: Competitive Moat · D4: Intermediation Risk · D5: Adaptation Capacity<br>
+  Scores are research estimates, not investment advice.
+</div>
+
+</body>
+</html>

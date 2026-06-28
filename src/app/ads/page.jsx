@@ -139,11 +139,27 @@ export default function ADS() {
         Latest Scores
       </h2>
       <div style={{ marginBottom: 16 }}>
-        <a href="/ads/weekly/issue-8/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+        <a href="/ads/weekly/issue-12/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
           <div>
-            <span style={{ fontSize: 14 }}>ISSUE #8 — The AI Restructuring Wave</span>
+            <span style={{ fontSize: 14 }}>ISSUE #12 — Platform Disruption: AI Commoditizes Digital Services</span>
             <span style={{ display: 'inline-block', marginLeft: 10, padding: '1px 7px', borderRadius: 3, fontSize: 10, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", background: '#fef2f2', color: '#dc2626' }}>NEW</span>
           </div>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>June 27, 2026</span>
+        </a>
+        <a href="/ads/weekly/issue-11/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <span style={{ fontSize: 14 }}>ISSUE #11 — The Great AI Divide</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>June 3, 2026</span>
+        </a>
+        <a href="/ads/weekly/issue-10/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <span style={{ fontSize: 14 }}>ISSUE #10 — Infrastructure vs. Obsolescence</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>May 20, 2026</span>
+        </a>
+        <a href="/ads/weekly/issue-9/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <span style={{ fontSize: 14 }}>ISSUE #9 — The Knowledge Economy Reckoning</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>May 13, 2026</span>
+        </a>
+        <a href="/ads/weekly/issue-8/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
+          <span style={{ fontSize: 14 }}>ISSUE #8 — The AI Restructuring Wave</span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: '#aaa', flexShrink: 0, marginLeft: 16 }}>May 6, 2026</span>
         </a>
         <a href="/ads/weekly/issue-7/" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #f0f0f0', padding: '14px 0', textDecoration: 'none', color: '#1a1a1a' }}>
